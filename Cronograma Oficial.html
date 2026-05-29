@@ -1,0 +1,1908 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Cronograma Oficial · Jejum Glicêmico 2D · v9</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@1,400;1,500;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ---------- Tokens ---------- */
+  :root {
+    --paper: #FCE7EE;
+    --card:  #FDEFF4;
+    --card-2:#F9DCE5;
+    --accent:#E81C92;
+    --burgundy:#7A1840;
+    --ink:   #0F0F0F;
+    --body:  #595959;
+    --rule:  #E8D5DC;
+    --rule-soft:#F0DDE3;
+
+    --serif: 'Newsreader', 'Georgia', 'Times New Roman', serif;
+    --sans:  'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+    --page-w: 210mm;
+    --page-h: 297mm;
+    --pad-x: 22mm;
+    --pad-top: 18mm;
+    --pad-bot: 16mm;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    background: #cfc7cb;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 18pt;
+    line-height: 1.5;
+  }
+
+  /* ---------- Page shell ---------- */
+  .page {
+    position: relative;
+    width: var(--page-w);
+    height: var(--page-h);
+    color: var(--ink);
+    overflow: hidden;
+    page-break-after: always;
+    break-after: page;
+    background:
+      radial-gradient(ellipse 90% 55% at 100% 0%, #fcd6e2 0%, rgba(252,214,226,0) 60%),
+      radial-gradient(ellipse 75% 45% at 0% 100%, #fbdfe8 0%, rgba(251,223,232,0) 65%),
+      linear-gradient(180deg, #ffffff 0%, #fef4f8 38%, #fce7ee 100%);
+  }
+
+  /* Decorative brand droplets — corner ornaments */
+  /* Bottom-right brand mark on cta card */
+  .br-brand {
+    position: absolute;
+    bottom: 18px;
+    right: 60px;
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    z-index: 2;
+    opacity: 0.5;
+  }
+  .br-brand .br-drop {
+    width: 40px;
+    height: 52px;
+    display: block;
+    transform: translateY(-4px);
+  }
+  .br-brand .br-drop svg { width: 100%; height: 100%; display: block; }
+  .br-brand .br-2d {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 36pt;
+    line-height: 1;
+    letter-spacing: 0;
+    color: transparent;
+    -webkit-text-stroke: 1.4px #E89BC2;
+    display: inline-flex;
+    align-items: baseline;
+    font-feature-settings: "lnum" 1;
+    font-variant-numeric: lining-nums;
+  }
+  .br-brand .br-2d .num {
+    font-size: 1.18em;
+    margin-right: -0.04em;
+    display: inline-block;
+  }
+  .br-brand .br-2d .letter {
+    font-size: 1.18em;
+    display: inline-block;
+  }
+
+  .corner-drop {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.55;
+  }
+  .corner-drop.tl { top: -36px; left: -36px; transform: rotate(200deg); width: 140px; }
+  .corner-drop.br { bottom: -50px; right: -40px; width: 180px; transform: rotate(20deg); opacity: 0.35; }
+  .corner-drop svg { width: 100%; height: auto; display: block; }
+
+  /* Brand vertical stripe on right edge of select pages */
+  .edge-stripe {
+    position: absolute;
+    top: 30mm;
+    bottom: 26mm;
+    right: 8mm;
+    width: 2px;
+    background: linear-gradient(180deg, rgba(232,28,146,0) 0%, var(--accent) 50%, rgba(232,28,146,0) 100%);
+    opacity: 0.25;
+  }
+  .edge-num {
+    position: absolute;
+    right: 4mm;
+    top: 30mm;
+    transform: rotate(90deg);
+    transform-origin: top right;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 8pt;
+    letter-spacing: 0.32em;
+    color: var(--burgundy);
+    white-space: nowrap;
+    opacity: 0.6;
+  }
+
+  /* Pill / chip / button system */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 20px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 14pt;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .pill.ghost {
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+  }
+  .pill.green {
+    background: #1F8A5B;
+    color: #fff;
+    border: none;
+  }
+  .pill.green .dot { background: #fff; }
+  .pill .dot {
+    width: 6px; height: 6px; border-radius: 50%; background: currentColor;
+    display: inline-block;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 24px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 12px;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 13pt;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    box-shadow: 0 1px 3px rgba(232,28,146,0.18);
+  }
+  .btn .arrow {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* Circular sticker badge — vintage stamp w/ scalloped edge */
+  .sticker {
+    --size: 130px;
+    width: var(--size); height: var(--size);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: calc(var(--size) * 0.086);
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    line-height: 1.05;
+    color: #fff;
+    transform: rotate(-10deg);
+    position: relative;
+    filter:
+      drop-shadow(0 1px 0 rgba(122,24,64,0.55))
+      drop-shadow(0 5px 10px rgba(232,28,146,0.30))
+      drop-shadow(0 1px 0 rgba(255,255,255,0.4));
+  }
+  .sticker .stamp-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    color: var(--accent);
+    z-index: 0;
+  }
+  .sticker .stamp-bg svg { width: 100%; height: 100%; display: block; }
+  .sticker .stamp-ring {
+    position: absolute;
+    inset: calc(var(--size) * 0.078);
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.85);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .sticker .stamp-ring::after {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    border: 1px dashed rgba(255,255,255,0.55);
+  }
+  .sticker .stamp-shine {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 28% 22%, rgba(255,255,255,0.32) 0%, rgba(255,255,255,0) 38%),
+      radial-gradient(circle at 70% 80%, rgba(122,24,64,0.18) 0%, rgba(122,24,64,0) 45%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .sticker > span {
+    display: block;
+    position: relative;
+    z-index: 2;
+  }
+  .sticker .top { margin-bottom: 3px; white-space: nowrap; }
+  .sticker .bot { margin-top: 3px; white-space: nowrap; }
+  .sticker .big {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: calc(var(--size) * 0.19);
+    letter-spacing: -0.005em;
+    line-height: 1;
+    text-transform: none;
+    white-space: nowrap;
+  }
+
+  /* Mini stamp — corner ornament with "2D" */
+  .stamp-mini {
+    width: 78px; height: 78px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 26pt;
+    color: #fff;
+    position: relative;
+    transform: rotate(14deg);
+    filter:
+      drop-shadow(0 2px 0 rgba(122,24,64,0.5))
+      drop-shadow(0 6px 10px rgba(232,28,146,0.28));
+  }
+  .stamp-mini .stamp-bg {
+    position: absolute; inset: 0; color: var(--burgundy); z-index: 0;
+  }
+  .stamp-mini .stamp-bg svg { width: 100%; height: 100%; display: block; }
+  .stamp-mini .stamp-ring {
+    position: absolute;
+    inset: 6px;
+    border-radius: 50%;
+    border: 1px dashed rgba(255,255,255,0.55);
+    z-index: 1;
+  }
+  .stamp-mini > span { position: relative; z-index: 2; line-height: 1; }
+
+  /* Droplet inline used as bullet / ornament */
+  .drop-inline {
+    display: inline-block;
+    width: 12px;
+    height: 16px;
+    vertical-align: -2px;
+    color: var(--accent);
+  }
+  .page:last-child { page-break-after: auto; break-after: auto; }
+
+  /* On-screen: stacked pages with a subtle shadow and centered */
+  @media screen {
+    body { padding: 36px 0 64px; }
+    .pages {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+    }
+    .page {
+      box-shadow: 0 6px 30px rgba(15,15,15,0.12), 0 1px 3px rgba(15,15,15,0.06);
+    }
+  }
+
+  /* Print rules */
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .pages { gap: 0; }
+    .page {
+      box-shadow: none;
+      margin: 0;
+    }
+  }
+
+  /* ---------- Common header / footer ---------- */
+  .ph-header {
+    position: absolute;
+    top: 12mm;
+    left: var(--pad-x);
+    right: var(--pad-x);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .ph-logo {
+    width: 150px;
+    height: auto;
+    display: block;
+  }
+  .ph-eyebrow {
+    display: none;
+  }
+
+  .ph-footer {
+    position: absolute;
+    bottom: 10mm;
+    left: var(--pad-x);
+    right: var(--pad-x);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--sans);
+    font-size: 13.5pt;
+    color: #7a6970;
+    letter-spacing: 0.02em;
+    z-index: 1;
+  }
+  .ph-footer .nutri { font-style: italic; }
+  .ph-footer .num   { font-feature-settings: "tnum"; }
+
+  /* ---------- Section indicator + H1 ---------- */
+  .page-body {
+    position: absolute;
+    top: 32mm;
+    bottom: 20mm;
+    left: var(--pad-x);
+    right: var(--pad-x);
+    z-index: 1;
+  }
+
+  .h1-block {
+    display: grid;
+    grid-template-columns: 16px 1fr;
+    column-gap: 18px;
+    align-items: start;
+    margin-bottom: 6mm;
+  }
+  .h1-mark {
+    width: 16px;
+    height: 22px;
+    color: var(--accent);
+    margin-top: 16px;
+    position: relative;
+  }
+  .h1-mark svg { width: 100%; height: 100%; display: block; }
+  .h1 {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 58pt;
+    line-height: 1.02;
+    color: var(--ink);
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .h1 .accent { color: var(--accent); }
+  .subhead {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 17pt;
+    color: var(--body);
+    margin: 8px 0 0;
+    letter-spacing: 0.01em;
+  }
+
+  .h2 {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 35pt;
+    line-height: 1.1;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  .eyebrow {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 13pt;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .eyebrow.muted { color: var(--burgundy); }
+
+  /* ============================================================
+     PAGE 1 — Cover (editorial rebuild)
+     ============================================================ */
+  .cover .ph-header { display: none; }
+
+  .cover-top {
+    position: absolute;
+    top: 14mm;
+    left: var(--pad-x);
+    right: var(--pad-x);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cover-top .logo-big {
+    width: 260px;
+    height: auto;
+    display: block;
+  }
+  .cover-top-right {
+    position: absolute;
+    top: 46mm;
+    left: var(--pad-x);
+    right: var(--pad-x);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    z-index: 3;
+  }
+  .cover-top-right .edition-pair {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .edition-line {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 18pt;
+    color: var(--burgundy);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+  .edition-line em {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .cover-divider {
+    position: absolute;
+    top: 42mm;
+    left: var(--pad-x);
+    right: var(--pad-x);
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--rule) 25%, var(--rule) 75%, transparent 100%);
+  }
+
+  .cover-titlewrap {
+    position: absolute;
+    top: 76mm;
+    bottom: 147mm;
+    left: var(--pad-x);
+    right: var(--pad-x);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .sidetag {
+    position: absolute;
+    top: 46mm;
+    left: var(--pad-x);
+    right: var(--pad-x);
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 12.5pt;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-align: left;
+    display: flex;
+    align-items: center;
+    height: 79px;
+  }
+  .cover-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 88pt;
+    line-height: 0.95;
+    margin: 0;
+    letter-spacing: -0.02em;
+    text-align: center;
+  }
+  .cover-title .line1 { display: block; color: var(--ink); }
+  .cover-title .line2 { display: block; color: var(--accent); margin-top: -4px; }
+  .cover-title .line2 .period { color: var(--accent); }
+
+  .page.cover .sticker {
+    position: absolute;
+  }
+
+  .cover-card {
+    position: absolute;
+    top: 150mm;
+    left: var(--pad-x);
+    right: var(--pad-x);
+    background: #F7CFDC;
+    padding: 22px 28px 24px;
+    border-radius: 14px;
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    column-gap: 18px;
+    row-gap: 4px;
+    align-items: start;
+    border-left: 4px solid var(--accent);
+  }
+  .cc-mark { padding-top: 6px; }
+  .cc-content { min-width: 0; grid-column: 2; }
+  .cc-meta {
+    grid-column: 2;
+    font-family: var(--sans);
+    font-size: 16pt;
+    color: var(--body);
+    margin-top: 8px;
+    white-space: normal;
+  }
+  .cc-meta .sep { color: var(--accent); margin: 0 8px; font-weight: 700; }
+  .card-eyebrow {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 13pt;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .card-main {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 40pt;
+    line-height: 1.02;
+    color: var(--ink);
+  }
+  .cover-letter {
+    position: absolute;
+    top: 200mm;
+    left: var(--pad-x);
+    right: var(--pad-x);
+    font-family: var(--sans);
+    font-size: 16pt;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .cover-letter p { margin: 0 0 10px; max-width: 165mm; }
+  .cover-letter .pull {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 27pt;
+    line-height: 1.22;
+    color: var(--accent);
+    margin: 12px 0 14px;
+  }
+  .signoff-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 10px;
+  }
+  .sig-line {
+    display: block;
+    width: 36px;
+    height: 2px;
+    background: var(--accent);
+  }
+  .signoff {
+    font-family: var(--sans);
+    font-size: 16pt;
+    color: var(--body);
+  }
+  .signoff em {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 18pt;
+    color: var(--ink);
+    margin-left: 4px;
+  }
+
+  /* ============================================================
+     PAGE 2 — Quem é a sua Nutri
+     ============================================================ */
+  .nutri-grid {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 14mm;
+    margin-top: 6mm;
+  }
+  .nutri-name {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 40pt;
+    line-height: 1.05;
+    margin: 0 0 8px;
+    color: var(--ink);
+  }
+  .nutri-eyebrow {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 12.5pt;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .nutri-bio p {
+    font-family: var(--sans);
+    font-size: 15pt;
+    line-height: 1.4;
+    color: var(--body);
+    margin: 0 0 9px;
+  }
+  .nutri-bio p:first-of-type {
+    color: var(--ink);
+    font-size: 15.5pt;
+  }
+
+  .nutri-deco {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .nutri-deco svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  .nutri-photo-wrap {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 6mm;
+    position: relative;
+  }
+  .nutri-photo {
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background-image: url('assets/bela-soft.jpg');
+    background-size: 135% auto;
+    background-position: center 42%;
+    background-repeat: no-repeat;
+    border: 6px solid #fff;
+    position: relative;
+    z-index: 1;
+  }
+
+  .stats-row {
+    margin-top: 4mm;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .stat {
+    background: var(--card-grad);
+    border-radius: 14px;
+    padding: 14px 16px 14px;
+  }
+  .stat .num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 32pt;
+    line-height: 1;
+    color: var(--burgundy);
+    margin-bottom: 8px;
+    white-space: nowrap;
+  }
+  .stat .label {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 14pt;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+
+  /* ============================================================
+     PAGE 3 — Erros Comuns
+     ============================================================ */
+  .errors-list {
+    margin-top: 2mm;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .error-card {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    gap: 18px;
+    padding: 10px 20px 12px 14px;
+    background: var(--card-grad);
+    border-radius: 14px;
+    align-items: start;
+  }
+  .error-num {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 14.5pt;
+    margin-top: 2px;
+    letter-spacing: 0.02em;
+  }
+  .error-title {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 17.5pt;
+    color: var(--ink);
+    margin: 0 0 4px;
+    letter-spacing: -0.005em;
+  }
+  .error-desc {
+    font-family: var(--sans);
+    font-size: 15pt;
+    line-height: 1.38;
+    color: var(--body);
+  }
+
+  /* ============================================================
+     PAGE 4 — Dicas para o Jejum
+     ============================================================ */
+  .tips-grid {
+    margin-top: 4mm;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .tip {
+    background: var(--card-grad);
+    border-radius: 14px;
+    padding: 22px 28px 22px 32px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+  .tip-num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 60pt;
+    line-height: 0.9;
+    color: var(--accent);
+    text-align: center;
+    min-width: 70px;
+  }
+  .tip-body { }
+  .tip-title {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 20pt;
+    color: var(--ink);
+    margin: 0 0 6px;
+  }
+  .tip-desc {
+    font-family: var(--sans);
+    font-size: 16.5pt;
+    line-height: 1.45;
+    color: var(--body);
+    margin: 0;
+  }
+
+  /* ============================================================
+     PAGE 5 — Aulas às 7h
+     ============================================================ */
+  .pull-block {
+    margin-top: 6mm;
+    background: var(--card-grad);
+    border-radius: 14px;
+    padding: 26px 32px;
+    display: grid;
+    grid-template-columns: 6px 1fr;
+    gap: 22px;
+    align-items: center;
+  }
+  .pull-block .bar {
+    width: 4px; height: 100%; background: var(--accent); border-radius: 4px;
+    align-self: stretch;
+  }
+  .pull-quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 25pt;
+    line-height: 1.25;
+    color: var(--ink);
+    margin: 0;
+  }
+  .pull-quote::before { content: "“"; color: var(--accent); margin-right: 2px; }
+  .pull-quote::after { content: "”"; color: var(--accent); }
+
+  .pillars-grid {
+    margin-top: 8mm;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 12px;
+  }
+  .pillar {
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 16px 20px 18px;
+    background: transparent;
+    display: grid;
+    grid-template-columns: 38px 1fr;
+    gap: 14px;
+    align-items: start;
+  }
+  .pillar-num {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 14.5pt;
+    margin-top: 4px;
+  }
+  .pillar-title {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 17pt;
+    color: var(--ink);
+    margin: 4px 0 5px;
+  }
+  .pillar-desc {
+    font-family: var(--sans);
+    font-size: 14.5pt;
+    line-height: 1.4;
+    color: var(--body);
+  }
+
+  /* ============================================================
+     PAGE 6 — Cronograma das Aulas
+     ============================================================ */
+  .schedule {
+    margin-top: 4mm;
+    display: flex;
+    flex-direction: column;
+  }
+  .schedule-row {
+    display: grid;
+    grid-template-columns: 66px 66px 1fr;
+    gap: 20px;
+    align-items: baseline;
+    padding: 8px 4px 9px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .schedule-row:last-child { border-bottom: none; }
+  .day-badge {
+    background: #F7CFDC;
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px 0 9px;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 13.5pt;
+    letter-spacing: 0.08em;
+    color: var(--burgundy);
+  }
+  .time {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 38pt;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .lesson-title {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 17pt;
+    color: var(--ink);
+    margin: 0 0 4px;
+  }
+  .lesson-desc {
+    font-family: var(--sans);
+    font-size: 15pt;
+    line-height: 1.38;
+    color: var(--body);
+  }
+
+  /* ============================================================
+     PAGE 7 — Tipos de Dietas
+     ============================================================ */
+  .diets-grid {
+    margin-top: 6mm;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .diet {
+    background: var(--card-grad);
+    border-radius: 14px;
+    padding: 22px 24px 24px;
+    display: grid;
+    grid-template-columns: 6px 1fr;
+    gap: 18px;
+    min-height: 160px;
+    align-items: start;
+  }
+  .diet-bar { width: 6px; background: var(--ink); border-radius: 4px; align-self: stretch; }
+  .diet-name {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 30pt;
+    margin: 0 0 8px;
+  }
+  .diet-desc {
+    font-family: var(--sans);
+    font-size: 15pt;
+    line-height: 1.4;
+    color: var(--body);
+  }
+  .diet.azul .diet-bar { background: #1E4FA8; }
+  .diet.azul .diet-name { color: #1E4FA8; }
+  .diet.vermelha .diet-bar { background: #C8324A; }
+  .diet.vermelha .diet-name { color: #C8324A; }
+  .diet.verde .diet-bar { background: #2E7D4A; }
+  .diet.verde .diet-name { color: #2E7D4A; }
+  .diet.preta .diet-bar { background: #0F0F0F; }
+  .diet.preta .diet-name { color: #0F0F0F; }
+
+  .diet-cta {
+    margin-top: 12px;
+    background: var(--card-grad);
+    border-radius: 14px;
+    padding: 20px 26px 22px;
+  }
+  .diet-cta .eyebrow { display: block; margin-bottom: 6px; }
+  .diet-cta p {
+    margin: 0;
+    font-family: var(--sans);
+    font-size: 15pt;
+    line-height: 1.4;
+    color: var(--ink);
+    max-width: 165mm;
+  }
+
+  /* ============================================================
+     PAGE 8 — Sua semana, dia a dia
+     ============================================================ */
+  .week {
+    margin-top: 6mm;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .week-row {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 28px;
+    align-items: start;
+    padding-top: 4px;
+  }
+  .week-pct {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 46pt;
+    line-height: 1;
+    color: var(--ink);
+    text-align: right;
+    font-feature-settings: "tnum";
+  }
+  .week-row.alt .week-pct { color: var(--accent); }
+  .week-day {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 17pt;
+    color: var(--ink);
+    margin: 4px 0 3px;
+  }
+  .week-day .dayname {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--burgundy);
+    font-size: 18pt;
+  }
+  .week-desc {
+    font-family: var(--sans);
+    font-size: 15pt;
+    line-height: 1.38;
+    color: var(--body);
+    margin-bottom: 5px;
+  }
+  .week-bar {
+    height: 3px;
+    background: var(--rule-soft);
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+  }
+  .week-bar::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: var(--pct, 0%);
+    background: var(--accent);
+    border-radius: 2px;
+  }
+
+  /* ============================================================
+     PAGE 9 — Encerramento
+     ============================================================ */
+  .end-title {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 70pt;
+    line-height: 1;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .end-title .l1 { display: block; color: var(--ink); }
+  .end-title .l2 { display: block; color: var(--accent); }
+
+  .end-lead {
+    margin-top: 6mm;
+    max-width: 165mm;
+    font-family: var(--sans);
+    font-size: 18pt;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .end-block {
+    margin-top: 6mm;
+  }
+  .end-block .eyebrow { margin-bottom: 12px; display: block; }
+  .end-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .end-item {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 18px;
+    align-items: center;
+    font-family: var(--sans);
+    font-size: 17pt;
+    color: var(--ink);
+  }
+  .check {
+    width: 28px; height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+  }
+  .check svg.dropmark { width: 22px; height: 28px; }
+
+  .cta-block {
+    position: absolute;
+    left: var(--pad-x);
+    right: var(--pad-x);
+    bottom: 19mm;
+    background: var(--card-grad);
+    border-radius: 14px;
+    padding: 22px 28px 24px;
+    border-left: 4px solid var(--accent);
+  }
+  .cta-text-wrap { min-width: 0; }
+  .cta-title {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 20pt;
+    line-height: 1.2;
+    margin: 0 0 12px;
+    color: var(--ink);
+  }
+  .cta-title .accent { color: var(--accent); }
+  .cta-text {
+    font-family: var(--sans);
+    font-size: 16pt;
+    line-height: 1.45;
+    color: var(--body);
+    margin: 0 0 14px;
+    max-width: 165mm;
+  }
+  .cta-sign {
+    display: inline-block;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 18pt;
+    color: var(--accent);
+  }
+
+  /* ---------- Print fidelity ---------- */
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  /* Compact schedule — full week on one page */
+  .sched-full .h1 { font-size: 38pt; }
+  .sched-full .h1-block { margin-bottom: 2.5mm; }
+  .sched-full .subhead { font-size: 15pt; }
+  .sched-full .schedule-row {
+    grid-template-columns: 56px 52px 1fr;
+    gap: 15px;
+    padding: 3px 4px 4px 0;
+  }
+  .sched-full .time { font-size: 26pt; }
+  .sched-full .lesson-title { font-size: 15.5pt; margin-bottom: 2px; }
+  .sched-full .lesson-desc { font-size: 13pt; line-height: 1.25; }
+  .sched-full .day-badge { font-size: 12pt; padding: 8px 0 7px; }
+
+  /* ---------- Tweaks panel hook ---------- */
+  #tweaks-root { position: fixed; right: 16px; bottom: 16px; z-index: 9999; }
+
+</style>
+</head>
+<body>
+
+<!-- Shared SVG defs: brand droplet -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="drop" viewBox="0 0 24 32">
+      <path d="M12 2 C 8 13 3 17 3 22 a9 9 0 0 0 18 0 C 21 17 16 13 12 2 z" fill="currentColor"/>
+    </symbol>
+    <symbol id="drop-outline" viewBox="0 0 24 32">
+      <path d="M12 2 C 8 13 3 17 3 22 a9 9 0 0 0 18 0 C 21 17 16 13 12 2 z" fill="none" stroke="currentColor" stroke-width="2"/>
+    </symbol>
+    <mask id="stamp-mask">
+      <circle cx="50" cy="50" r="50" fill="white"/>
+      <circle cx="98.01" cy="56.90" r="2.6" fill="black"/><circle cx="94.12" cy="70.15" r="2.6" fill="black"/><circle cx="86.65" cy="81.76" r="2.6" fill="black"/><circle cx="76.22" cy="90.80" r="2.6" fill="black"/><circle cx="63.66" cy="96.54" r="2.6" fill="black"/><circle cx="50.00" cy="98.50" r="2.6" fill="black"/><circle cx="36.34" cy="96.54" r="2.6" fill="black"/><circle cx="23.78" cy="90.80" r="2.6" fill="black"/><circle cx="13.35" cy="81.76" r="2.6" fill="black"/><circle cx="5.88" cy="70.15" r="2.6" fill="black"/><circle cx="1.99" cy="56.90" r="2.6" fill="black"/><circle cx="1.99" cy="43.10" r="2.6" fill="black"/><circle cx="5.88" cy="29.85" r="2.6" fill="black"/><circle cx="13.35" cy="18.24" r="2.6" fill="black"/><circle cx="23.78" cy="9.20" r="2.6" fill="black"/><circle cx="36.34" cy="3.46" r="2.6" fill="black"/><circle cx="50.00" cy="1.50" r="2.6" fill="black"/><circle cx="63.66" cy="3.46" r="2.6" fill="black"/><circle cx="76.22" cy="9.20" r="2.6" fill="black"/><circle cx="86.65" cy="18.24" r="2.6" fill="black"/><circle cx="94.12" cy="29.85" r="2.6" fill="black"/><circle cx="98.01" cy="43.10" r="2.6" fill="black"/>
+    </mask>
+    <symbol id="stamp-shape" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="50" fill="currentColor" mask="url(#stamp-mask)"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="pages">
+
+  <!-- ============================================================
+       PAGE 1 — Cover  (editorial rebuild)
+       ============================================================ -->
+  <section class="page cover" data-screen-label="01 Capa" data-om-validate>
+
+    <!-- Top band -->
+    <div class="cover-top">
+      <img class="logo-big" src="assets/logo.webp" alt="Jejum Glicêmico 2D">
+    </div>
+
+    <div class="cover-divider"></div>
+
+    <div class="cover-top-right">
+      <div class="edition-pair">
+        <span class="pill green"><span class="dot"></span>Material Oficial</span>
+        <div class="edition-line">Turma <em>07</em> &middot; 2026</div>
+      </div>
+    </div>
+
+    <!-- Title block (centered vertically + horizontally) -->
+    <div class="cover-titlewrap">
+      <h1 class="cover-title">
+        <span class="line1">Cronograma</span>
+        <span class="line2">Oficial<span class="period">.</span></span>
+      </h1>
+    </div>
+
+    <div class="sticker" style="--size: 137px; top: 134mm; right: 12mm; z-index: 5;">
+      <span class="stamp-bg"><svg viewBox="0 0 100 100"><path d="M 95.711 44.850 L 100.000 50.000 L 95.711 55.150 L 98.746 61.126 L 93.419 65.193 L 95.048 71.694 L 88.949 74.473 L 89.092 81.174 L 82.527 82.527 L 81.174 89.092 L 74.473 88.949 L 71.694 95.048 L 65.193 93.419 L 61.126 98.746 L 55.150 95.711 L 50.000 100.000 L 44.850 95.711 L 38.874 98.746 L 34.807 93.419 L 28.306 95.048 L 25.527 88.949 L 18.826 89.092 L 17.473 82.527 L 10.908 81.174 L 11.051 74.473 L 4.952 71.694 L 6.581 65.193 L 1.254 61.126 L 4.289 55.150 L 0.000 50.000 L 4.289 44.850 L 1.254 38.874 L 6.581 34.807 L 4.952 28.306 L 11.051 25.527 L 10.908 18.826 L 17.473 17.473 L 18.826 10.908 L 25.527 11.051 L 28.306 4.952 L 34.807 6.581 L 38.874 1.254 L 44.850 4.289 L 50.000 0.000 L 55.150 4.289 L 61.126 1.254 L 65.193 6.581 L 71.694 4.952 L 74.473 11.051 L 81.174 10.908 L 82.527 17.473 L 89.092 18.826 L 88.949 25.527 L 95.048 28.306 L 93.419 34.807 L 98.746 38.874 L 95.711 44.850 Z" fill="#E81C92"/></svg></span>
+      <span class="stamp-ring"></span>
+      <span class="stamp-shine"></span>
+      <span class="top">glicemia de</span>
+      <span class="big">2 dígitos</span>
+      <span class="bot">em 7 dias</span>
+    </div>
+
+    <!-- Date card -->
+    <div class="cover-card">
+      <div class="cc-mark"><svg viewBox="0 0 24 32" style="width:18px;height:24px;color:var(--accent)"><use href="#drop"/></svg></div>
+      <div class="cc-content">
+        <div class="card-eyebrow">Data do Desafio</div>
+        <div class="card-main">Segunda a Domingo</div>
+      </div>
+      <div class="cc-meta">
+        <span>7 dias guiados</span>
+        <span class="sep">&middot;</span>
+        <span>aulas às 7h</span>
+      </div>
+    </div>
+
+    <!-- Letter from Bela -->
+    <div class="cover-letter">
+      <p>Oi! Eu sou a Bela, sua nutricionista, e estou aqui torcendo junto com você por essa jornada de transformação. O Desafio Jejum Glicêmico 2D é a sua chance de alcançar glicemia de 2 dígitos, ter mais energia e viver sem medo do diabetes.</p>
+      <p class="pull">Bora virar a chave do seu metabolismo?</p>
+      <div class="signoff-row">
+        <span class="sig-line"></span>
+        <span class="signoff">com carinho, <em>Bela.</em></span>
+      </div>
+    </div>
+
+    <div class="ph-footer">
+      <span class="nutri">Isabela Clerot · Nutricionista</span>
+      <span class="num">1 / 10</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PAGE 2 — Quem é a sua Nutri
+       ============================================================ -->
+  <section class="page" data-screen-label="02 Quem é a sua Nutri" data-om-validate>
+    <div class="nutri-deco" aria-hidden="true">
+      <svg viewBox="0 0 793 1123" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="blob-rose" cx="40%" cy="35%" r="70%">
+            <stop offset="0%" stop-color="#F2A7BD" stop-opacity="0.95"/>
+            <stop offset="100%" stop-color="#F6BACB" stop-opacity="0.7"/>
+          </radialGradient>
+          <radialGradient id="blob-cream" cx="40%" cy="40%" r="75%">
+            <stop offset="0%" stop-color="#FDF2EC" stop-opacity="0.95"/>
+            <stop offset="100%" stop-color="#FCE5DA" stop-opacity="0.85"/>
+          </radialGradient>
+          <radialGradient id="blob-pink" cx="55%" cy="45%" r="65%">
+            <stop offset="0%" stop-color="#FBC8D6" stop-opacity="0.95"/>
+            <stop offset="100%" stop-color="#FBD9E3" stop-opacity="0.7"/>
+          </radialGradient>
+          <radialGradient id="blob-soft" cx="50%" cy="40%" r="70%">
+            <stop offset="0%" stop-color="#FCEFE7" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="#FBE0E7" stop-opacity="0.6"/>
+          </radialGradient>
+        </defs>
+        <g style="mix-blend-mode: multiply; opacity: 0.6;">
+          <!-- Large irregular rose blob (lower right) -->
+          <path d="M 706 924 C 758 902 778 838 766 786 C 758 738 720 700 668 696 C 614 692 562 706 528 750 C 488 800 478 856 510 902 C 538 940 588 956 640 950 C 670 946 692 942 706 924 Z" fill="url(#blob-rose)"/>
+          <!-- Asymmetric cream wave above rose -->
+          <path d="M 612 738 C 666 720 698 666 678 614 C 660 568 612 542 562 558 C 514 574 482 612 488 660 C 492 712 538 750 588 748 C 600 748 606 742 612 738 Z" fill="url(#blob-cream)"/>
+          <!-- Soft pink kidney shape under stats area -->
+          <path d="M 458 962 C 412 956 384 924 392 884 C 404 838 466 822 526 836 C 590 850 632 880 624 916 C 618 956 552 974 510 970 C 488 968 472 964 458 962 Z" fill="url(#blob-pink)"/>
+          <!-- Lobed amoeba shape (cream/peach) -->
+          <path d="M 700 800 C 736 786 760 752 750 720 C 738 690 706 678 678 692 C 654 706 642 728 648 752 C 654 776 674 796 696 798 C 698 798 700 800 700 800 Z" fill="url(#blob-soft)" transform="rotate(8 700 760)"/>
+          <!-- Small organic drop (rose accent) -->
+          <path d="M 460 838 C 478 826 488 808 480 792 C 470 776 446 776 432 790 C 422 802 422 822 436 832 C 446 840 454 840 460 838 Z" fill="#F2A7BD" fill-opacity="0.5"/>
+          <!-- Tiny pebble shapes -->
+          <path d="M 656 632 C 668 626 674 614 668 604 C 660 594 644 596 638 608 C 634 618 642 632 656 632 Z" fill="#F4ADC0" fill-opacity="0.45"/>
+          <path d="M 768 866 C 778 862 782 852 776 844 C 768 836 754 840 750 850 C 748 858 760 868 768 866 Z" fill="#F4ADC0" fill-opacity="0.4"/>
+          <!-- Outline pebble for editorial detail -->
+          <path d="M 596 752 C 644 728 696 740 706 778 C 712 814 670 850 622 848 C 580 846 552 814 564 784 C 572 766 580 760 596 752 Z" fill="none" stroke="#E89BC2" stroke-width="1.1" stroke-opacity="0.4"/>
+
+          <!-- Trail emerging from bottom-left, heading toward photo -->
+          <!-- Anchor: large amoeba at bottom-left -->
+          <path d="M 40 1050 C 18 990 70 920 150 924 C 232 928 280 982 268 1036 C 256 1080 196 1100 124 1094 C 78 1090 50 1078 40 1050 Z" fill="url(#blob-cream)"/>
+          <!-- Layered rose under cream -->
+          <path d="M 86 1018 C 92 980 138 952 192 968 C 246 988 256 1030 220 1066 C 184 1098 122 1086 92 1058 C 80 1046 82 1032 86 1018 Z" fill="url(#blob-pink)"/>
+          <!-- Mid step: cream blob slightly up-right -->
+          <path d="M 244 940 C 264 906 318 902 348 928 C 380 958 366 1006 322 1014 C 280 1020 236 994 240 962 C 240 954 242 946 244 940 Z" fill="url(#blob-cream)" transform="rotate(-6 296 970)"/>
+          <!-- Soft rose pebble bridging to right cluster -->
+          <path d="M 358 904 C 372 880 414 882 428 906 C 438 928 422 956 392 956 C 366 956 348 932 358 904 Z" fill="url(#blob-pink)"/>
+          <!-- Small accent dot, mid-trail -->
+          <path d="M 312 868 C 320 856 338 858 344 870 C 348 882 336 898 322 894 C 314 892 308 880 312 868 Z" fill="#F2A7BD" fill-opacity="0.55"/>
+          <!-- Smaller pebble continuing diagonally -->
+          <path d="M 450 850 C 462 836 484 840 490 858 C 494 874 476 890 460 884 C 448 880 444 864 450 850 Z" fill="#F4ADC0" fill-opacity="0.5"/>
+          <!-- Tiny ascending accent dots toward photo -->
+          <circle cx="172" cy="900" r="9" fill="#F4ADC0" opacity="0.45"/>
+          <circle cx="296" cy="884" r="6" fill="#F2A7BD" opacity="0.5"/>
+          <circle cx="408" cy="838" r="7" fill="#E89BC2" opacity="0.55"/>
+          <!-- Soft outline accent for editorial continuity -->
+          <path d="M 200 994 C 246 968 308 974 326 1004 C 340 1030 308 1058 256 1056 C 212 1054 184 1026 196 1004 C 198 1000 198 996 200 994 Z" fill="none" stroke="#E89BC2" stroke-width="1" stroke-opacity="0.35"/>
+
+          <!-- Element emerging directly from bottom-left corner -->
+          <path d="M -10 1080 C 20 1056 70 1058 88 1090 C 100 1116 80 1136 32 1138 C 0 1138 -18 1118 -10 1080 Z" fill="url(#blob-rose)"/>
+          <path d="M 14 1106 C 30 1094 56 1096 64 1112 C 70 1126 54 1140 30 1138 C 14 1136 6 1124 14 1106 Z" fill="#F2A7BD" fill-opacity="0.5"/>
+
+          <!-- Fill for bottom-right corner -->
+          <path d="M 736 1004 C 776 988 808 1018 800 1056 C 794 1090 752 1102 728 1080 C 708 1058 712 1018 736 1004 Z" fill="url(#blob-cream)"/>
+          <path d="M 758 1052 C 778 1042 796 1058 794 1080 C 790 1100 766 1108 750 1094 C 738 1082 744 1062 758 1052 Z" fill="url(#blob-pink)"/>
+          <circle cx="710" cy="1014" r="9" fill="#F2A7BD" opacity="0.5"/>
+          <circle cx="788" cy="1010" r="6" fill="#E89BC2" opacity="0.55"/>
+        </g>
+      </svg>
+    </div>
+    <header class="ph-header">
+      <img class="ph-logo" src="assets/logo.webp" alt="">
+      <span class="ph-eyebrow">Cronograma Oficial</span>
+    </header>
+
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1" style="white-space: nowrap;">Quem é a sua Nutri</h1>
+          <p class="subhead">Conheça quem vai te guiar nessa semana</p>
+        </div>
+      </div>
+
+      <div class="nutri-grid">
+        <div>
+          <h2 class="nutri-name">Isabela Clerot</h2>
+          <div class="nutri-eyebrow">Nutricionista · Remissão de Diabetes Tipo 2</div>
+          <div class="nutri-bio">
+            <p>Sou apaixonada por ajudar diabéticos a conquistarem a remissão do diabetes tipo 2. Minha jornada começou após enfrentar pré-diabetes e ganho de peso aos 30 anos.</p>
+            <p style="color: rgb(15, 15, 15)">Hoje, com base em evidências científicas, já ajudei mais de 20.000 pessoas a sair do ciclo de remédios e picos de glicemia.</p>
+            <p style="color: rgb(15, 15, 15)">Estou aqui para te guiar com estratégias práticas, alimentação de verdade e muito carinho.</p>
+          </div>
+        </div>
+        <div class="nutri-photo-wrap">
+          <div class="nutri-photo" role="img" aria-label="Isabela Clerot"></div>
+        </div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat">
+          <div class="num">20.000+</div>
+          <div class="label">pessoas atendidas</div>
+        </div>
+        <div class="stat">
+          <div class="num">7 dias</div>
+          <div class="label">para virar a chave</div>
+        </div>
+        <div class="stat">
+          <div class="num">7h</div>
+          <div class="label">aulas diárias</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ph-footer">
+      <span class="nutri">Isabela Clerot · Nutricionista</span>
+      <span class="num">2 / 10</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PAGE 3 — Erros Comuns
+       ============================================================ -->
+  <section class="page" data-screen-label="03 Erros Comuns" data-om-validate>
+    <header class="ph-header">
+      <img class="ph-logo" src="assets/logo.webp" alt="">
+      <span class="ph-eyebrow">Cronograma Oficial</span>
+    </header>
+
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1">Erros Comuns</h1>
+          <p class="subhead">E como evitá-los nessa semana</p>
+        </div>
+      </div>
+
+      <div class="errors-list">
+        <article class="error-card">
+          <div class="error-num">01</div>
+          <div>
+            <div class="error-title">Pular as aulas</div>
+            <div class="error-desc">Cada aula às 7h é um momento em que te entrego estratégias novas. Reserve esse horário como um compromisso com você — é só uma hora por dia para mudar sua vida.</div>
+          </div>
+        </article>
+        <article class="error-card">
+          <div class="error-num">02</div>
+          <div>
+            <div class="error-title">Não medir glicemia e não registrar as medidas</div>
+            <div class="error-desc">Esses números são um mapa do quanto você está avançando. Dedique 5 minutinhos para registrar e celebre cada pequena vitória.</div>
+          </div>
+        </article>
+        <article class="error-card">
+          <div class="error-num">03</div>
+          <div>
+            <div class="error-title">Misturar alimentos sem critério</div>
+            <div class="error-desc">Confie na dieta personalizada (Azul, Vermelha, Verde ou Preta) do seu Pré-Diagnóstico. Ela foi feita para o seu corpo.</div>
+          </div>
+        </article>
+        <article class="error-card">
+          <div class="error-num">04</div>
+          <div>
+            <div class="error-title">Achar que jejum glicêmico é passar fome</div>
+            <div class="error-desc">O jejum glicêmico é uma ferramenta segura e milenar para estabilizar sua glicemia. Comece com jejuns curtos, beba água com uma pitada de sal e escute seu corpo.</div>
+          </div>
+        </article>
+        <article class="error-card">
+          <div class="error-num">05</div>
+          <div>
+            <div class="error-title">Desistir nos primeiros dias</div>
+            <div class="error-desc">É normal sentir um desconforto inicial — é o seu corpo se ajustando. Lembre do motivo que te trouxe até aqui: viver sem medo do diabetes.</div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="ph-footer">
+      <span class="nutri">Isabela Clerot · Nutricionista</span>
+      <span class="num">3 / 10</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PAGE 4 — Dicas para o Jejum
+       ============================================================ -->
+  <section class="page" data-screen-label="04 Dicas para o Jejum" data-om-validate>
+    <header class="ph-header">
+      <img class="ph-logo" src="assets/logo.webp" alt="">
+      <span class="ph-eyebrow">Cronograma Oficial</span>
+    </header>
+
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1">Dicas para o Jejum</h1>
+          <p class="subhead">Pequenos gestos que fazem toda a diferença</p>
+        </div>
+      </div>
+
+      <div class="tips-grid">
+        <div class="tip">
+          <div class="tip-num">01</div>
+          <div class="tip-body">
+            <h3 class="tip-title">Água com sal</h3>
+            <p class="tip-desc">Adicione uma pitada de sal à água para evitar fraqueza e manter o equilíbrio eletrolítico durante o jejum.</p>
+          </div>
+        </div>
+        <div class="tip">
+          <div class="tip-num">02</div>
+          <div class="tip-body">
+            <h3 class="tip-title">Escute seu corpo</h3>
+            <p class="tip-desc">Se sentir fome, você pode aumentar a quantidade de alimentos na sua dieta, mas não inclua alimentos diferentes do que tem no seu plano alimentar.</p>
+          </div>
+        </div>
+        <div class="tip">
+          <div class="tip-num">03</div>
+          <div class="tip-body">
+            <h3 class="tip-title">Planeje as refeições</h3>
+            <p class="tip-desc">Prepare os ingredientes com antecedência para seguir o cardápio do seu perfil metabólico sem dificuldades.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ph-footer">
+      <span class="nutri">Isabela Clerot · Nutricionista</span>
+      <span class="num">4 / 10</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PAGE 6 — Dicas para o Jejum (cont.)
+       ============================================================ -->
+  <section class="page" data-screen-label="05 Dicas (cont.)" data-om-validate>
+    <header class="ph-header">
+      <img class="ph-logo" src="assets/logo.webp" alt="">
+      <span class="ph-eyebrow">Cronograma Oficial</span>
+    </header>
+
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1">Dicas para o Jejum</h1>
+          <p class="subhead">Continuação: hábitos para sustentar a virada</p>
+        </div>
+      </div>
+
+      <div class="tips-grid">
+        <div class="tip">
+          <div class="tip-num">04</div>
+          <div class="tip-body">
+            <h3 class="tip-title">Durma bem</h3>
+            <p class="tip-desc">O sono regula hormônios e ajuda na estabilidade glicêmica. Priorize noites tranquilas e regulares.</p>
+          </div>
+        </div>
+        <div class="tip">
+          <div class="tip-num">05</div>
+          <div class="tip-body">
+            <h3 class="tip-title">Seja consistente</h3>
+            <p class="tip-desc">Cada dia é um passo para sua liberdade metabólica. A persistência é a chave para resultados duradouros.</p>
+          </div>
+        </div>
+        <div class="tip">
+          <div class="tip-num">06</div>
+          <div class="tip-body">
+            <h3 class="tip-title">Celebre o progresso</h3>
+            <p class="tip-desc">Anote cada pequena vitória — glicemia mais baixa, mais energia, sono melhor. O progresso te impulsiona.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ph-footer">
+      <span class="nutri">Isabela Clerot · Nutricionista</span>
+      <span class="num">5 / 10</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PAGE 5 — Aulas às 7h
+       ============================================================ -->
+  <section class="page" data-screen-label="06 Aulas às 7h" data-om-validate>
+    <header class="ph-header">
+      <img class="ph-logo" src="assets/logo.webp" alt="">
+      <span class="ph-eyebrow">Cronograma Oficial</span>
+    </header>
+
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1">Aulas às 7h</h1>
+          <p class="subhead">O coração do desafio</p>
+        </div>
+      </div>
+
+      <div class="pull-block">
+        <div class="bar"></div>
+        <p class="pull-quote">É onde eu te entrego estratégias, respondo dúvidas e te motivo a dar o próximo passo da sua transformação.</p>
+      </div>
+
+      <div class="pillars-grid">
+        <div class="pillar">
+          <div class="pillar-num">01</div>
+          <div>
+            <h3 class="pillar-title">Compromisso matinal</h3>
+            <p class="pillar-desc">Estar presente é se comprometer com você e com sua transformação de saúde.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">02</div>
+          <div>
+            <h3 class="pillar-title">Materiais exclusivos</h3>
+            <p class="pillar-desc">Você recebe PDFs, planilhas e áudios que complementam seu aprendizado diário.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">03</div>
+          <div>
+            <h3 class="pillar-title">Grupo do Desafio no Whatsapp</h3>
+            <p class="pillar-desc">Onde você recebe todos os meus avisos e lembretes para as aulas.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">04</div>
+          <div>
+            <h3 class="pillar-title">Foco e energia</h3>
+            <p class="pillar-desc">Mantém o ritmo e a motivação necessários para transformar sua saúde metabólica.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ph-footer">
+      <span class="nutri">Isabela Clerot · Nutricionista</span>
+      <span class="num">6 / 10</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PAGE 7 — Cronograma das Aulas (semana completa)
+       ============================================================ -->
+  <section class="page sched-full" data-screen-label="07 Cronograma das Aulas" data-om-validate>
+    <header class="ph-header">
+      <img class="ph-logo" src="assets/logo.webp" alt="">
+      <span class="ph-eyebrow">Cronograma Oficial</span>
+    </header>
+
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1">Cronograma das Aulas</h1>
+          <p class="subhead">Às 7h, todos os dias da semana</p>
+        </div>
+      </div>
+
+      <div class="schedule">
+        <div class="schedule-row">
+          <div class="day-badge">SEG</div>
+          <div class="time">7h</div>
+          <div>
+            <h3 class="lesson-title">O Raio-X da sua Saúde</h3>
+            <p class="lesson-desc">Descubra a verdade escondida do seu corpo e tome o controle da sua saúde.</p>
+          </div>
+        </div>
+        <div class="schedule-row">
+          <div class="day-badge">TER</div>
+          <div class="time">7h</div>
+          <div>
+            <h3 class="lesson-title">Corpo em Alerta</h3>
+            <p class="lesson-desc">Identifique os alertas do seu metabolismo antes que seja tarde demais.</p>
+          </div>
+        </div>
+        <div class="schedule-row">
+          <div class="day-badge">QUA</div>
+          <div class="time">7h</div>
+          <div>
+            <h3 class="lesson-title">Alimento Sob Controle</h3>
+            <p class="lesson-desc">Transforme cada refeição em um passo rumo à sua liberdade metabólica.</p>
+          </div>
+        </div>
+        <div class="schedule-row">
+          <div class="day-badge">QUI</div>
+          <div class="time">7h</div>
+          <div>
+            <h3 class="lesson-title">Transformação Real</h3>
+            <p class="lesson-desc">Liberte-se do peso do diabetes e viva com energia e confiança.</p>
+          </div>
+        </div>
+        <div class="schedule-row">
+          <div class="day-badge">SEX</div>
+          <div class="time">7h</div>
+          <div>
+            <h3 class="lesson-title">Mapa da Virada</h3>
+            <p class="lesson-desc">Trace a rota definitiva para uma vida equilibrada e sem oscilações.</p>
+          </div>
+        </div>
+        <div class="schedule-row">
+          <div class="day-badge">SÁB</div>
+          <div class="time">7h</div>
+          <div>
+            <h3 class="lesson-title">Exames Decifrados</h3>
+            <p class="lesson-desc">Desvende os segredos dos seus exames e domine sua saúde como nunca.</p>
+          </div>
+        </div>
+        <div class="schedule-row">
+          <div class="day-badge">DOM</div>
+          <div class="time">7h</div>
+          <div>
+            <h3 class="lesson-title">Encerramento Triunfal</h3>
+            <p class="lesson-desc">Celebre sua transformação, viva com saúde inabalável e concorra a prêmios.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ph-footer">
+      <span class="nutri">Isabela Clerot · Nutricionista</span>
+      <span class="num">7 / 10</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PAGE 7 — Tipos de Dietas
+       ============================================================ -->
+  <section class="page" data-screen-label="08 Tipos de Dietas" data-om-validate>
+    <header class="ph-header">
+      <img class="ph-logo" src="assets/logo.webp" alt="">
+      <span class="ph-eyebrow">Cronograma Oficial</span>
+    </header>
+
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1">Tipos de Dietas</h1>
+          <p class="subhead">Personalizadas para o seu perfil metabólico</p>
+        </div>
+      </div>
+
+      <div class="diets-grid">
+        <div class="diet azul">
+          <div class="diet-bar"></div>
+          <div>
+            <h3 class="diet-name">Dieta Azul</h3>
+            <p class="diet-desc">Cuidado extra para controlar a glicemia.</p>
+          </div>
+        </div>
+        <div class="diet vermelha">
+          <div class="diet-bar"></div>
+          <div>
+            <h3 class="diet-name">Dieta Vermelha</h3>
+            <p class="diet-desc">Para quem está no meio do caminho.</p>
+          </div>
+        </div>
+        <div class="diet verde">
+          <div class="diet-bar"></div>
+          <div>
+            <h3 class="diet-name">Dieta Verde</h3>
+            <p class="diet-desc">Recomeço cheio de vitalidade.</p>
+          </div>
+        </div>
+        <div class="diet preta">
+          <div class="diet-bar"></div>
+          <div>
+            <h3 class="diet-name">Dieta Preta</h3>
+            <p class="diet-desc">Para quem usa medicamentos.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="diet-cta">
+        <span class="eyebrow">Como escolho minha dieta?</span>
+        <p>Preencha o Pré-Diagnóstico Metabólico na área de membros. Com base nas suas respostas, você recebe um Parecer personalizado indicando a dieta ideal para o seu corpo.</p>
+      </div>
+    </div>
+
+    <div class="ph-footer">
+      <span class="nutri">Isabela Clerot · Nutricionista</span>
+      <span class="num">8 / 10</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PAGE 8 — Sua semana, dia a dia
+       ============================================================ -->
+  <section class="page" data-screen-label="09 Sua semana, dia a dia" data-om-validate>
+    <header class="ph-header">
+      <img class="ph-logo" src="assets/logo.webp" alt="">
+      <span class="ph-eyebrow">Cronograma Oficial</span>
+    </header>
+
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1">Sua semana, dia a dia</h1>
+          <p class="subhead">O que esperar do corpo em cada etapa</p>
+        </div>
+      </div>
+
+      <div class="week">
+        <div class="week-row">
+          <div class="week-pct">14%</div>
+          <div>
+            <div class="week-day"><span class="dayname">Segunda</span></div>
+            <div class="week-desc">Início e primeiras observações.</div>
+            <div class="week-bar" style="--pct:14%;"></div>
+          </div>
+        </div>
+        <div class="week-row alt">
+          <div class="week-pct">28%</div>
+          <div>
+            <div class="week-day"><span class="dayname">Terça</span></div>
+            <div class="week-desc">Café da manhã estratégico.</div>
+            <div class="week-bar" style="--pct:28%;"></div>
+          </div>
+        </div>
+        <div class="week-row">
+          <div class="week-pct">42%</div>
+          <div>
+            <div class="week-day"><span class="dayname">Quarta</span></div>
+            <div class="week-desc">Almoço com menos fome.</div>
+            <div class="week-bar" style="--pct:42%;"></div>
+          </div>
+        </div>
+        <div class="week-row alt">
+          <div class="week-pct">56%</div>
+          <div>
+            <div class="week-day"><span class="dayname">Quinta</span></div>
+            <div class="week-desc">Menos fome, mais energia, menos sono.</div>
+            <div class="week-bar" style="--pct:56%;"></div>
+          </div>
+        </div>
+        <div class="week-row">
+          <div class="week-pct">70%</div>
+          <div>
+            <div class="week-day"><span class="dayname">Sexta</span></div>
+            <div class="week-desc">Menos gases, menos inchaço, mais energia.</div>
+            <div class="week-bar" style="--pct:70%;"></div>
+          </div>
+        </div>
+        <div class="week-row alt">
+          <div class="week-pct">84%</div>
+          <div>
+            <div class="week-day"><span class="dayname">Sábado</span></div>
+            <div class="week-desc">Redução da cintura, glicemia estável.</div>
+            <div class="week-bar" style="--pct:84%;"></div>
+          </div>
+        </div>
+        <div class="week-row">
+          <div class="week-pct">100%</div>
+          <div>
+            <div class="week-day"><span class="dayname">Domingo</span></div>
+            <div class="week-desc">Glicemia estável, pressão arterial controlada.</div>
+            <div class="week-bar" style="--pct:100%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ph-footer">
+      <span class="nutri">Isabela Clerot · Nutricionista</span>
+      <span class="num">9 / 10</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PAGE 9 — Sua transformação começa agora
+       ============================================================ -->
+  <section class="page" data-screen-label="10 Sua transformação começa agora" data-om-validate>
+    <header class="ph-header">
+      <img class="ph-logo" src="assets/logo.webp" alt="">
+      <span class="ph-eyebrow">Cronograma Oficial</span>
+    </header>
+
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="end-title">
+            <span class="l1">Sua transformação</span>
+            <span class="l2">começa agora</span>
+          </h1>
+        </div>
+      </div>
+
+      <p class="end-lead">Você está a um passo de mudar sua vida. O Desafio Jejum Glicêmico 2D é a porta de entrada para uma saúde vibrante, com glicemia controlada e energia renovada.</p>
+
+      <div class="end-block">
+        <span class="eyebrow">Nessa semana você tem acesso a</span>
+        <ul class="end-list">
+          <li class="end-item">
+            <span class="check"><svg class="dropmark" viewBox="0 0 24 32"><use href="#drop"/></svg></span>
+            <span>Aulas diárias às 7h</span>
+          </li>
+          <li class="end-item">
+            <span class="check"><svg class="dropmark" viewBox="0 0 24 32"><use href="#drop"/></svg></span>
+            <span>Materiais exclusivos: PDFs, planilhas, áudios motivacionais</span>
+          </li>
+          <li class="end-item">
+            <span class="check"><svg class="dropmark" viewBox="0 0 24 32"><use href="#drop"/></svg></span>
+            <span>Dieta personalizada para seu perfil metabólico</span>
+          </li>
+          <li class="end-item">
+            <span class="check"><svg class="dropmark" viewBox="0 0 24 32"><use href="#drop"/></svg></span>
+            <span>Orientação direta da Bela rumo à remissão do diabetes</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cta-block">
+      <div class="cta-text-wrap">
+        <h2 class="cta-title"><span class="accent" style="color: rgb(15, 15, 15)">Acesse agora</span> a área de membros e assista as aulas de preparação. Você merece uma vida sem medo do diabetes — e eu estou aqui para te ajudar.</h2>
+        <div class="cta-sign">Com carinho, Bela.</div>
+      </div>
+      <div class="br-brand">
+        <span class="br-drop"><svg viewBox="0 0 24 32"><path d="M12 2 C 8 13 3 17 3 22 a9 9 0 0 0 18 0 C 21 17 16 13 12 2 z" fill="none" stroke="#E89BC2" stroke-width="1.4"/></svg></span>
+        <span class="br-2d"><span class="num">2</span><span class="letter" style="height: 46px; width: 5px">D</span></span>
+      </div>
+    </div>
+
+    <div class="ph-footer">
+      <span class="nutri">Isabela Clerot · Nutricionista</span>
+      <span class="num">10 / 10</span>
+    </div>
+  </section>
+
+</div>
+
+</body>
+</html>

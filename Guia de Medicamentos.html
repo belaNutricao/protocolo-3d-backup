@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Guia Simples de Medicamentos · Diabetes Tipo 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@1,400;1,500;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/bela-style.css">
+<style>
+  .drug-card {
+    background: var(--card-grad);
+    border-radius: 16px;
+    padding: 22px 28px 24px;
+    margin-bottom: 14px;
+    position: relative;
+  }
+  .drug-card .header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .drug-name {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: 28pt; line-height: 1.05; color: var(--burgundy); margin: 0;
+  }
+  .drug-class {
+    font-family: var(--sans); font-weight: 600; font-size: 11pt;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--accent);
+  }
+  .drug-section { margin-top: 10px; }
+  .drug-label {
+    font-family: var(--sans); font-weight: 700; font-size: 11.5pt;
+    letter-spacing: 0.10em; text-transform: uppercase; color: var(--burgundy);
+    margin-bottom: 4px;
+  }
+  .drug-body {
+    font-family: var(--sans); font-size: 14pt; line-height: 1.42;
+    color: var(--ink); margin: 0 0 8px;
+  }
+  .drug-brands {
+    font-family: var(--sans); font-size: 13pt; line-height: 1.45;
+    color: var(--body); margin: 0;
+  }
+  .drug-brands strong { color: var(--ink); font-weight: 600; }
+  .risk-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 11.5pt;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-left: auto;
+  }
+  .risk-pill.no  { background: #E2F2E7; color: var(--diet-verde); }
+  .risk-pill.yes { background: #FFE0E5; color: var(--diet-vermelha); }
+  .risk-pill.maybe { background: #FFF3CC; color: #8a6300; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="drop" viewBox="0 0 24 32"><path d="M12 2 C 8 13 3 17 3 22 a9 9 0 0 0 18 0 C 21 17 16 13 12 2 z" fill="currentColor"/></symbol>
+  </defs>
+</svg>
+
+<div class="pages">
+
+  <!-- COVER -->
+  <section class="page cover" data-screen-label="01 Capa">
+    <div class="cover-top"><img class="logo-big" src="assets/logo.webp" alt="Jejum Glicêmico 2D"></div>
+    <div class="cover-divider"></div>
+    <div class="cover-eyebrow">Guia de Apoio · Diabetes Tipo 2</div>
+    <h1 class="cover-title smaller">
+      <span class="line1">Guia Simples</span>
+      <span class="line2">de Medicamentos</span>
+    </h1>
+
+    <div class="sticker" style="--size: 130px; position: absolute; top: 152mm; right: 16mm; z-index: 5;">
+      <span class="stamp-bg"><svg viewBox="0 0 100 100"><path d="M 95.711 44.850 L 100.000 50.000 L 95.711 55.150 L 98.746 61.126 L 93.419 65.193 L 95.048 71.694 L 88.949 74.473 L 89.092 81.174 L 82.527 82.527 L 81.174 89.092 L 74.473 88.949 L 71.694 95.048 L 65.193 93.419 L 61.126 98.746 L 55.150 95.711 L 50.000 100.000 L 44.850 95.711 L 38.874 98.746 L 34.807 93.419 L 28.306 95.048 L 25.527 88.949 L 18.826 89.092 L 17.473 82.527 L 10.908 81.174 L 11.051 74.473 L 4.952 71.694 L 6.581 65.193 L 1.254 61.126 L 4.289 55.150 L 0.000 50.000 L 4.289 44.850 L 1.254 38.874 L 6.581 34.807 L 4.952 28.306 L 11.051 25.527 L 10.908 18.826 L 17.473 17.473 L 18.826 10.908 L 25.527 11.051 L 28.306 4.952 L 34.807 6.581 L 38.874 1.254 L 44.850 4.289 L 50.000 0.000 L 55.150 4.289 L 61.126 1.254 L 65.193 6.581 L 71.694 4.952 L 74.473 11.051 L 81.174 10.908 L 82.527 17.473 L 89.092 18.826 L 88.949 25.527 L 95.048 28.306 L 93.419 34.807 L 98.746 38.874 L 95.711 44.850 Z" fill="#E81C92"/></svg></span>
+      <span class="stamp-ring"></span><span class="stamp-shine"></span>
+      <span class="top">conversa</span>
+      <span class="big">esclarecida</span>
+      <span class="bot">com seu médico</span>
+    </div>
+
+    <div style="position: absolute; top: 158mm; left: var(--pad-x); right: var(--pad-x);">
+      <p class="lead" style="font-size: 17pt; max-width: 130mm;">Entenda, de forma clara e direta, como agem os principais remédios para o controle do diabetes tipo 2 — incluindo as insulinas.</p>
+    </div>
+
+    <div style="position: absolute; bottom: 28mm; left: var(--pad-x); right: var(--pad-x);">
+      <div class="callout info">
+        <div class="icon">i</div>
+        <div>
+          <div class="title">Para que serve este guia</div>
+          <div class="body">Este material é educativo. Ele te ajuda a conversar com o seu médico com mais segurança e a tomar decisões mais conscientes. <strong>Nunca altere doses ou pare medicamentos por conta própria.</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">1 / 7</span></div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="page" data-screen-label="02 Introdução">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1">Introdução</h1>
+          <p class="subhead">Por que entender os seus remédios faz toda a diferença</p>
+        </div>
+      </div>
+
+      <p class="lead">Esse guia foi feito para te ajudar a entender, de forma clara e direta, como agem os principais medicamentos para o controle do diabetes tipo 2 — incluindo as insulinas.</p>
+      <p class="lead">Assim, você pode <strong style="color: var(--accent);">conversar com seu médico com mais segurança</strong> e tomar decisões mais conscientes sobre o seu tratamento.</p>
+
+      <h2 class="h2" style="margin-top: 10mm;">Como ler cada ficha</h2>
+      <div class="col-3" style="margin-top: 6mm;">
+        <div class="card-bordered">
+          <div class="eyebrow muted" style="font-size: 11pt;">Como age</div>
+          <p class="body" style="margin: 6px 0 0; font-size: 14pt;">O caminho que o remédio percorre no seu corpo para baixar a glicemia.</p>
+        </div>
+        <div class="card-bordered">
+          <div class="eyebrow muted" style="font-size: 11pt;">Risco de hipoglicemia</div>
+          <p class="body" style="margin: 6px 0 0; font-size: 14pt;">Se o remédio pode fazer sua glicemia cair demais — atenção especial nesta semana.</p>
+        </div>
+        <div class="card-bordered">
+          <div class="eyebrow muted" style="font-size: 11pt;">Nomes comerciais</div>
+          <p class="body" style="margin: 6px 0 0; font-size: 14pt;">Para você reconhecer o remédio na embalagem que tem em casa.</p>
+        </div>
+      </div>
+
+      <div class="pull-block" style="margin-top: 8mm;">
+        <div class="bar"></div>
+        <p class="pull-quote">Nenhum medicamento substitui uma boa alimentação. Mas entender como cada um age te ajuda a colaborar com o tratamento.</p>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">2 / 7</span></div>
+  </section>
+
+  <!-- METFORMINA + SULFONILUREIAS -->
+  <section class="page" data-screen-label="03 Metformina · Sulfonilureias">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1 smaller">Antidiabéticos orais</h1>
+          <p class="subhead">Os mais comuns no Brasil</p>
+        </div>
+      </div>
+
+      <div class="drug-card">
+        <div class="header">
+          <h3 class="drug-name">Metformina</h3>
+          <span class="drug-class">Biguanida</span>
+          <span class="risk-pill no">Hipoglicemia · Não</span>
+        </div>
+        <div class="drug-section">
+          <div class="drug-label">Como age</div>
+          <p class="drug-body">Ajuda o seu fígado a produzir menos glicose e melhora a sensibilidade do seu corpo à insulina.</p>
+        </div>
+        <div class="drug-section">
+          <div class="drug-label">Nomes comerciais</div>
+          <p class="drug-brands">Glifage, Glifage XR, Dimefor, Glucoformin, Glucomet, Metfor, MetD.</p>
+        </div>
+      </div>
+
+      <div class="drug-card">
+        <div class="header">
+          <h3 class="drug-name">Sulfonilureias</h3>
+          <span class="drug-class">Estimulam o pâncreas</span>
+          <span class="risk-pill yes">Hipoglicemia · Sim</span>
+        </div>
+        <div class="drug-section">
+          <div class="drug-label">Como agem</div>
+          <p class="drug-body">Fazem seu pâncreas liberar mais insulina, mesmo quando você não está comendo. Por isso o risco de hipoglicemia.</p>
+        </div>
+        <div class="drug-section">
+          <div class="drug-label">Princípios ativos e nomes comerciais</div>
+          <p class="drug-brands"><strong>Glibenclamida:</strong> Daonil, Glibenclamida Medley, Glibene.<br>
+          <strong>Gliclazida:</strong> Diamicron, Glicazide CR, Diamicron MR.<br>
+          <strong>Glimepirida:</strong> Amaryl, Glimepax, Glimepirida Medley.</p>
+        </div>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">3 / 7</span></div>
+  </section>
+
+  <!-- DPP-4 + GLP-1 -->
+  <section class="page" data-screen-label="04 DPP-4 · GLP-1">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1 smaller">Hormônios da saciedade</h1>
+          <p class="subhead">Atuam depois das refeições</p>
+        </div>
+      </div>
+
+      <div class="drug-card">
+        <div class="header">
+          <h3 class="drug-name">Inibidores da DPP-4</h3>
+          <span class="drug-class">Comprimido</span>
+          <span class="risk-pill no">Hipoglicemia · Não*</span>
+        </div>
+        <div class="drug-section">
+          <div class="drug-label">Como agem</div>
+          <p class="drug-body">Aumentam hormônios naturais que ajudam o corpo a liberar insulina só depois das refeições. <em style="color: var(--body);">*Não dão hipoglicemia, exceto quando associados a sulfonilureia.</em></p>
+        </div>
+        <div class="drug-section">
+          <div class="drug-label">Princípios ativos e nomes comerciais</div>
+          <p class="drug-brands"><strong>Sitagliptina:</strong> Januvia, Janumet (com Metformina). &middot; <strong>Vildagliptina:</strong> Galvus, Galvus Met. &middot; <strong>Saxagliptina:</strong> Onglyza, Kombiglyze XR. &middot; <strong>Linagliptina:</strong> Trajenta, Jentadueto. &middot; <strong>Alogliptina:</strong> Nesina.</p>
+        </div>
+      </div>
+
+      <div class="drug-card">
+        <div class="header">
+          <h3 class="drug-name">Análogos do GLP-1</h3>
+          <span class="drug-class">Injeção</span>
+          <span class="risk-pill no">Hipoglicemia · Não*</span>
+        </div>
+        <div class="drug-section">
+          <div class="drug-label">Como agem</div>
+          <p class="drug-body">Reduzem o apetite, retardam o esvaziamento do estômago e ajudam a liberar insulina depois das refeições. <em style="color: var(--body);">*Não dão hipoglicemia, exceto quando associados a sulfonilureia ou insulina.</em></p>
+        </div>
+        <div class="drug-section">
+          <div class="drug-label">Princípios ativos e nomes comerciais</div>
+          <p class="drug-brands"><strong>Liraglutida:</strong> Victoza, Saxenda (obesidade). &middot; <strong>Dulaglutida:</strong> Trulicity. &middot; <strong>Semaglutida:</strong> Ozempic, Wegovy (obesidade), Rybelsus (oral). &middot; <strong>Tirzepatida:</strong> Mounjaro.</p>
+        </div>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">4 / 7</span></div>
+  </section>
+
+  <!-- SGLT2 + GLITAZONAS + ALFA-GLICOSIDASE -->
+  <section class="page" data-screen-label="05 SGLT2 · Glitazonas · Alfa-glicosidase">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1 smaller">Outras famílias</h1>
+          <p class="subhead">Cada uma age em um ponto diferente</p>
+        </div>
+      </div>
+
+      <div class="drug-card">
+        <div class="header">
+          <h3 class="drug-name">Inibidores do SGLT2</h3>
+          <span class="drug-class">"Gliflozinas"</span>
+          <span class="risk-pill no">Hipoglicemia · Não*</span>
+        </div>
+        <div class="drug-section">
+          <div class="drug-label">Como agem</div>
+          <p class="drug-body">Fazem o excesso de glicose sair pela urina. <em style="color: var(--body);">*Não dão hipoglicemia quando usados sozinhos.</em></p>
+        </div>
+        <div class="drug-section">
+          <div class="drug-label">Princípios ativos e nomes comerciais</div>
+          <p class="drug-brands"><strong>Dapagliflozina:</strong> Forxiga, Xigduo. &middot; <strong>Empagliflozina:</strong> Jardiance, Synjardy. &middot; <strong>Canagliflozina:</strong> Invokana. &middot; <strong>Ertugliflozina:</strong> Steglatro, Segluromet.</p>
+        </div>
+        <div class="callout danger" style="margin-top: 10px; padding: 12px 18px;">
+          <div class="icon">!</div>
+          <div><div class="body" style="font-size: 13.5pt;">Atenção: podem aumentar o risco de infecções urinárias e de cetoacidose em dietas com pouco carboidrato.</div></div>
+        </div>
+      </div>
+
+      <div class="col-2">
+        <div class="drug-card" style="margin-bottom: 0;">
+          <div class="header">
+            <h3 class="drug-name" style="font-size: 24pt;">Glitazonas</h3>
+            <span class="risk-pill no">Hipo · Não</span>
+          </div>
+          <div class="drug-section">
+            <div class="drug-label">Como agem</div>
+            <p class="drug-body">Aumentam a sensibilidade do corpo à insulina.</p>
+          </div>
+          <div class="drug-section">
+            <div class="drug-label">Exemplo</div>
+            <p class="drug-brands"><strong>Pioglitazona</strong> (Actos). Pode causar inchaço e ganho de peso.</p>
+          </div>
+        </div>
+        <div class="drug-card" style="margin-bottom: 0;">
+          <div class="header">
+            <h3 class="drug-name" style="font-size: 24pt;">Alfa-glicosidase</h3>
+            <span class="risk-pill maybe">GI</span>
+          </div>
+          <div class="drug-section">
+            <div class="drug-label">Como agem</div>
+            <p class="drug-body">Retardam a absorção do açúcar que você come.</p>
+          </div>
+          <div class="drug-section">
+            <div class="drug-label">Exemplo</div>
+            <p class="drug-brands"><strong>Acarbose</strong> (Glucobay). Pode causar gases e inchaço.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">5 / 7</span></div>
+  </section>
+
+  <!-- INSULINAS -->
+  <section class="page" data-screen-label="06 Insulinas">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1 smaller">Insulinas</h1>
+          <p class="subhead">Humanas e análogas</p>
+        </div>
+      </div>
+
+      <div class="drug-card">
+        <div class="header">
+          <h3 class="drug-name">Insulinas</h3>
+          <span class="drug-class">Injeção</span>
+          <span class="risk-pill yes">Hipoglicemia · Sim</span>
+        </div>
+        <div class="drug-section">
+          <div class="drug-label">Como agem</div>
+          <p class="drug-body">Substituem ou complementam a insulina natural do seu corpo. Existem tipos com ação rápida, intermediária e lenta — a combinação depende do seu padrão glicêmico.</p>
+        </div>
+      </div>
+
+      <div class="col-3" style="margin-top: 4mm;">
+        <div class="card-bordered">
+          <div class="eyebrow muted" style="font-size: 11pt; margin-bottom: 6px;">Basais (ação longa)</div>
+          <p class="drug-brands" style="font-size: 13.5pt;">
+            <strong>NPH:</strong> Insulatard, Humulin N<br>
+            <strong>Glargina:</strong> Lantus, Basaglar, Toujeo<br>
+            <strong>Detemir:</strong> Levemir<br>
+            <strong>Degludeca:</strong> Tresiba
+          </p>
+        </div>
+        <div class="card-bordered">
+          <div class="eyebrow muted" style="font-size: 11pt; margin-bottom: 6px;">Rápidas (ação curta)</div>
+          <p class="drug-brands" style="font-size: 13.5pt;">
+            <strong>Regular:</strong> Novolin R, Humulin R<br>
+            <strong>Lispro:</strong> Humalog<br>
+            <strong>Aspart:</strong> Novorapid<br>
+            <strong>Glulisina:</strong> Apidra
+          </p>
+        </div>
+        <div class="card-bordered">
+          <div class="eyebrow muted" style="font-size: 11pt; margin-bottom: 6px;">Misturas</div>
+          <p class="drug-brands" style="font-size: 13.5pt;">
+            <strong>NPH + Regular:</strong> Novolin 70/30, Humulin 70/30<br>
+            <strong>Lispro + Protamina:</strong> Humalog Mix 25, Mix 50
+          </p>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top: 8mm;">
+        <div class="icon warn">!</div>
+        <div>
+          <div class="title warn">Atenção</div>
+          <div class="body">A dose de insulina precisa ser ajustada conforme a alimentação e a sua glicemia. Sempre converse com o seu médico antes de qualquer mudança.</div>
+        </div>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">6 / 7</span></div>
+  </section>
+
+  <!-- DICA FINAL -->
+  <section class="page" data-screen-label="07 Dica Importante">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1">Dica importante</h1>
+          <p class="subhead">Para fechar com confiança</p>
+        </div>
+      </div>
+
+      <div class="pull-block" style="margin: 6mm 0;">
+        <div class="bar"></div>
+        <p class="pull-quote">Nenhum medicamento substitui uma boa alimentação. Mas entender como cada um age te ajuda a colaborar com o tratamento.</p>
+      </div>
+
+      <div class="callout danger">
+        <div class="icon">!</div>
+        <div>
+          <div class="title">Se sentir hipoglicemia, não ignore</div>
+          <div class="body">Sintomas comuns: <strong>fraqueza, tremedeira, suor frio, palpitação, tontura, visão embaçada</strong>. Meça sua glicemia imediatamente. Se estiver baixa, corrija com:</div>
+        </div>
+      </div>
+
+      <div class="num-card" style="margin-top: 12px;">
+        <div class="n">!</div>
+        <div>
+          <div class="t">1 colher de chá de açúcar em ½ copo de água (100 mL)</div>
+          <div class="d">Espere 15–30 minutos e meça novamente. Se ainda estiver baixa, repita. Quando normalizar, faça uma refeição completa.</div>
+        </div>
+      </div>
+
+      <div class="cta-block">
+        <h2 class="cta-title"><span class="accent">Use este guia</span> para perguntas mais precisas no consultório.</h2>
+        <p class="cta-text">A jornada para a glicemia de 2 dígitos é feita em parceria com o seu médico. Quanto mais clareza você tem sobre o seu tratamento, mais firme caminha.</p>
+        <div class="cta-sign">Com carinho, Bela.</div>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">7 / 7</span></div>
+  </section>
+
+</div>
+<script>
+// Force reflow after fonts load (fixes layout shift from font-display: swap)
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(() => {
+    document.body.style.transform = 'translateZ(0)';
+    requestAnimationFrame(() => { document.body.style.transform = ''; });
+  });
+}
+</script>
+</body>
+</html>

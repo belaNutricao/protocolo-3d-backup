@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Aula 4 · Transformação Real</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@1,400;1,500;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/bela-style.css">
+<style>
+  .timeline { position: relative; padding-left: 28px; margin-top: 4mm; }
+  .timeline::before {
+    content: ""; position: absolute; left: 8px; top: 8px; bottom: 8px;
+    width: 3px; background: var(--rule); border-radius: 2px;
+  }
+  .timeline .tl-item { position: relative; padding: 10px 0 14px; }
+  .timeline .tl-item::before {
+    content: ""; position: absolute; left: -28px; top: 18px;
+    width: 17px; height: 17px; background: var(--accent);
+    border: 3px solid #fff; border-radius: 50%;
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+  .timeline .tl-when {
+    font-family: var(--sans); font-weight: 700; font-size: 11pt;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--burgundy);
+    margin-bottom: 2px;
+  }
+  .timeline .tl-title {
+    font-family: var(--serif); font-style: italic; font-size: 18pt;
+    color: var(--ink); margin: 0 0 6px; line-height: 1.2;
+  }
+  .timeline .tl-desc {
+    font-family: var(--sans); font-size: 14pt; line-height: 1.4; color: var(--body); margin: 0;
+  }
+
+  /* Systems grid */
+  .sys-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 4mm; }
+  .sys-card {
+    background: var(--card); border-radius: 14px;
+    padding: 14px 18px;
+    border-left: 4px solid var(--accent);
+  }
+  .sys-card h4 { font-family: var(--sans); font-weight: 700; font-size: 14.5pt; color: var(--ink); margin: 0 0 4px; }
+  .sys-card p { font-family: var(--sans); font-size: 13.5pt; line-height: 1.4; color: var(--body); margin: 0; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="drop" viewBox="0 0 24 32"><path d="M12 2 C 8 13 3 17 3 22 a9 9 0 0 0 18 0 C 21 17 16 13 12 2 z" fill="currentColor"/></symbol>
+  </defs>
+</svg>
+
+<div class="pages">
+
+  <!-- COVER -->
+  <section class="page cover" data-screen-label="01 Capa">
+    <div class="cover-top"><img class="logo-big" src="assets/logo.webp" alt="Jejum Glicêmico 2D"></div>
+    <div class="cover-divider"></div>
+    <div class="cover-eyebrow">Aula 04 · Quinta-feira · 7h</div>
+    <h1 class="cover-title tiny">
+      <span class="line1">Transformação</span>
+      <span class="line2">Real</span>
+    </h1>
+    <p class="cover-subtitle" style="position: absolute; top: 130mm;">Quebre as correntes do diabetes</p>
+
+    <div class="sticker" style="--size: 140px; position: absolute; top: 152mm; right: 16mm; z-index: 5;">
+      <span class="stamp-bg"><svg viewBox="0 0 100 100"><path d="M 95.711 44.850 L 100.000 50.000 L 95.711 55.150 L 98.746 61.126 L 93.419 65.193 L 95.048 71.694 L 88.949 74.473 L 89.092 81.174 L 82.527 82.527 L 81.174 89.092 L 74.473 88.949 L 71.694 95.048 L 65.193 93.419 L 61.126 98.746 L 55.150 95.711 L 50.000 100.000 L 44.850 95.711 L 38.874 98.746 L 34.807 93.419 L 28.306 95.048 L 25.527 88.949 L 18.826 89.092 L 17.473 82.527 L 10.908 81.174 L 11.051 74.473 L 4.952 71.694 L 6.581 65.193 L 1.254 61.126 L 4.289 55.150 L 0.000 50.000 L 4.289 44.850 L 1.254 38.874 L 6.581 34.807 L 4.952 28.306 L 11.051 25.527 L 10.908 18.826 L 17.473 17.473 L 18.826 10.908 L 25.527 11.051 L 28.306 4.952 L 34.807 6.581 L 38.874 1.254 L 44.850 4.289 L 50.000 0.000 L 55.150 4.289 L 61.126 1.254 L 65.193 6.581 L 71.694 4.952 L 74.473 11.051 L 81.174 10.908 L 82.527 17.473 L 89.092 18.826 L 88.949 25.527 L 95.048 28.306 L 93.419 34.807 L 98.746 38.874 L 95.711 44.850 Z" fill="#E81C92"/></svg></span>
+      <span class="stamp-ring"></span><span class="stamp-shine"></span>
+      <span class="top">glicemia de</span>
+      <span class="big">2 dígitos</span>
+      <span class="bot">em 7 dias</span>
+    </div>
+
+    <div style="position: absolute; top: 165mm; left: var(--pad-x); right: var(--pad-x);">
+      <p class="lead" style="font-size: 17pt; max-width: 130mm;">Desmistificamos o diabetes e mostramos estratégias práticas para reconquistar sua saúde metabólica — com clareza e baseado em evidências.</p>
+    </div>
+
+    <div style="position: absolute; bottom: 28mm; left: var(--pad-x); right: var(--pad-x);">
+      <div class="callout info">
+        <div class="icon">i</div>
+        <div>
+          <div class="title">A virada começa hoje</div>
+          <div class="body">Você está mais da metade do desafio. Hoje a gente expande o conhecimento — para a transformação ser duradoura, não apenas dessa semana.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">1 / 12</span></div>
+  </section>
+
+  <!-- ACOMPANHAMENTO E AJUSTES -->
+  <section class="page" data-screen-label="02 Acompanhamento e ajustes">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1 smaller">Acompanhamento e ajustes</h1>
+          <p class="subhead">Alimentando-se adequadamente</p>
+        </div>
+      </div>
+
+      <p class="lead">Estamos monitorando atentamente os valores glicêmicos, sintomas e dúvidas que vocês compartilham. É fundamental manter o diálogo aberto para ajustar o programa às necessidades individuais.</p>
+
+      <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 6mm;">
+        <div class="num-card">
+          <div class="n">01</div>
+          <div>
+            <div class="t">Não fique com fome</div>
+            <div class="d">Se sentir fome entre as refeições programadas, <strong>repita a última refeição</strong> que fez. Não passe fome.</div>
+          </div>
+        </div>
+        <div class="num-card">
+          <div class="n">02</div>
+          <div>
+            <div class="t">Ajuste os horários</div>
+            <div class="d">Aproxime ou espace as refeições conforme sua necessidade. O importante é manter a qualidade das escolhas.</div>
+          </div>
+        </div>
+        <div class="num-card">
+          <div class="n">03</div>
+          <div>
+            <div class="t">Priorize a saciedade</div>
+            <div class="d">Escolha alimentos que dão saciedade duradoura — proteínas e gorduras boas. Evite o que causa pico glicêmico.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pull-block" style="margin-top: 8mm;">
+        <div class="bar"></div>
+        <p class="pull-quote">Este é um processo de aprendizado sobre o seu próprio corpo. Os ajustes fazem parte natural do caminho.</p>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">2 / 12</span></div>
+  </section>
+
+  <!-- DESCONSTRUINDO MITOS -->
+  <section class="page" data-screen-label="03 Desconstruindo mitos">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1 smaller">Desconstruindo mitos</h1>
+          <p class="subhead">Sobre o diabetes — com base em evidências</p>
+        </div>
+      </div>
+
+      <p class="lead">Esta aula tem um objetivo claro: <strong>expandir sua visão sobre o diabetes</strong>, eliminando mitos e desinformações que podem estar atrapalhando a sua jornada de saúde.</p>
+
+      <div class="pull-block" style="margin: 6mm 0;">
+        <div class="bar"></div>
+        <p class="pull-quote">O conhecimento é o primeiro passo para a transformação real. Quando entendemos verdadeiramente o que acontece no nosso corpo, ganhamos o poder de mudar.</p>
+      </div>
+
+      <h2 class="h2" style="margin-top: 8mm; margin-bottom: 4mm;">O que vem nas próximas aulas</h2>
+      <div class="col-2" style="gap: 14px;">
+        <div class="num-card">
+          <div class="n">★</div>
+          <div>
+            <div class="t">Mapa da Virada</div>
+            <div class="d">Um guia completo para reverter sua condição metabólica.</div>
+          </div>
+        </div>
+        <div class="num-card">
+          <div class="n">★</div>
+          <div>
+            <div class="t">Exames Decifrados</div>
+            <div class="d">Análise detalhada dos seus exames + sorteio especial.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">3 / 12</span></div>
+  </section>
+
+  <!-- AJUSTES ESTRATÉGICOS NO CARDÁPIO -->
+  <section class="page" data-screen-label="04 Ajustes no cardápio">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1 smaller">Ajustes no cardápio</h1>
+          <p class="subhead">O que muda nessa fase do desafio</p>
+        </div>
+      </div>
+
+      <div class="col-3" style="gap: 12px; margin-top: 4mm;">
+        <div class="card-soft" style="padding: 18px 22px;">
+          <div class="eyebrow" style="margin-bottom: 6px;">Café da manhã</div>
+          <h3 style="font-family: var(--serif); font-style: italic; font-size: 22pt; margin: 0 0 8px; color: var(--burgundy);">Otimizado</h3>
+          <p class="body" style="font-size: 13.5pt; margin: 0;">Tiramos o que causava picos pela manhã. Você ganha estabilidade da glicose o dia inteiro.</p>
+        </div>
+        <div class="card-soft" style="padding: 18px 22px;">
+          <div class="eyebrow" style="margin-bottom: 6px;">Almoço</div>
+          <h3 style="font-family: var(--serif); font-style: italic; font-size: 22pt; margin: 0 0 8px; color: var(--burgundy);">Equilibrado</h3>
+          <p class="body" style="font-size: 13.5pt; margin: 0;">Combinações que evitam sonolência pós-prandial e mantêm seu foco e energia à tarde.</p>
+        </div>
+        <div class="card-soft" style="padding: 18px 22px; border-left: 4px solid var(--accent);">
+          <div class="eyebrow" style="margin-bottom: 6px;">Novo padrão</div>
+          <h3 style="font-family: var(--serif); font-style: italic; font-size: 22pt; margin: 0 0 8px; color: var(--accent);">Pula o lanche</h3>
+          <p class="body" style="font-size: 13.5pt; margin: 0;">Refeições principais mais substanciais. Pode dobrar as porções recomendadas, sempre dentro da lista.</p>
+        </div>
+      </div>
+
+      <div class="callout safe" style="margin-top: 8mm;">
+        <div class="icon">✓</div>
+        <div>
+          <div class="title">Lembrete importante</div>
+          <div class="body">O objetivo <strong>não é passar fome</strong>, mas otimizar as escolhas. Se precisar, aumente as porções das refeições principais para manter saciedade.</div>
+        </div>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">4 / 12</span></div>
+  </section>
+
+  <!-- HIPOGLICEMIA REATIVA -->
+  <section class="page" data-screen-label="05 Hipoglicemia reativa">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1 smaller">Hipoglicemia reativa</h1>
+          <p class="subhead">Reconheça os sinais do seu corpo</p>
+        </div>
+      </div>
+
+      <p class="lead">A hipoglicemia reativa é importante de entender para quem está mudando a alimentação. Os sintomas podem aparecer <strong>mesmo com a glicemia acima de 70 ou 100 mg/dL</strong>.</p>
+
+      <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 4mm;">
+        <div class="num-card">
+          <div class="n">!</div>
+          <div>
+            <div class="t">Sintomas comuns</div>
+            <div class="d">Tremores, suor frio, tontura, irritabilidade, fome súbita, ansiedade e confusão mental podem indicar uma queda relativa da glicemia.</div>
+          </div>
+        </div>
+        <div class="num-card">
+          <div class="n">✓</div>
+          <div>
+            <div class="t">Momento de correção</div>
+            <div class="d">Ao sentir os sintomas, siga as orientações da sua dieta — corrija sem comprometer seus avanços.</div>
+          </div>
+        </div>
+        <div class="num-card">
+          <div class="n">☀</div>
+          <div>
+            <div class="t">Fenômeno do alvorecer</div>
+            <div class="d">O cortisol natural da manhã pode elevar sua glicemia, mesmo em jejum. Quanto menor a resistência à insulina, menos você percebe esse aumento.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pull-block" style="margin-top: 6mm;">
+        <div class="bar"></div>
+        <p class="pull-quote">Entender esses processos te ajuda a não confundir sinais temporários de adaptação com problemas reais.</p>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">5 / 12</span></div>
+  </section>
+
+  <!-- HARMONIA METABÓLICA -->
+  <section class="page" data-screen-label="06 Harmonia Metabólica">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1 smaller">Harmonia metabólica</h1>
+          <p class="subhead">O verdadeiro objetivo</p>
+        </div>
+      </div>
+
+      <p class="lead">Mais do que baixar números, o desafio busca um <strong>equilíbrio integral</strong>: glicemia estável, hormônios regulados e células sensíveis à insulina.</p>
+
+      <div class="col-2" style="gap: 12px; margin-top: 4mm;">
+        <div class="num-card">
+          <div class="n">★</div>
+          <div>
+            <div class="t">Estabilidade glicêmica</div>
+            <div class="d">Manter glicemia próxima a 100 mg/dL.</div>
+          </div>
+        </div>
+        <div class="num-card">
+          <div class="n">★</div>
+          <div>
+            <div class="t">Redução de oscilações</div>
+            <div class="d">Evitar picos e quedas abruptas.</div>
+          </div>
+        </div>
+        <div class="num-card">
+          <div class="n">★</div>
+          <div>
+            <div class="t">Equilíbrio hormonal</div>
+            <div class="d">Regular insulina, glucagon, cortisol e outros.</div>
+          </div>
+        </div>
+        <div class="num-card">
+          <div class="n">★</div>
+          <div>
+            <div class="t">Saúde celular</div>
+            <div class="d">Melhorar a sensibilidade à insulina.</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="body" style="margin-top: 8mm; font-size: 15pt;">Quando alcançamos essa harmonia, reduzimos drasticamente o risco de complicações associadas ao diabetes — e ganhamos uma sensação geral de bem-estar, energia e vitalidade. Nosso corpo foi <strong>projetado para funcionar em equilíbrio</strong>.</p>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">6 / 12</span></div>
+  </section>
+
+  <!-- SUPERANDO A ABSTINÊNCIA -->
+  <section class="page" data-screen-label="07 Superando a abstinência">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1 smaller">Superando a abstinência</h1>
+          <p class="subhead">E os efeitos colaterais iniciais</p>
+        </div>
+      </div>
+
+      <p class="lead">Nos primeiros dias é normal sentir desconfortos — sinais de que o corpo está se adaptando ao novo padrão metabólico.</p>
+
+      <div class="col-3" style="gap: 12px; margin-top: 4mm;">
+        <div class="num-card">
+          <div class="n">01</div>
+          <div>
+            <div class="t">Intestino preguiçoso</div>
+            <div class="d">Aumente a água para 2–3 litros/dia. Adicione psyllium para fibras solúveis que ajudam o trânsito.</div>
+          </div>
+        </div>
+        <div class="num-card">
+          <div class="n">02</div>
+          <div>
+            <div class="t">Reposição de eletrólitos</div>
+            <div class="d">Pouco carboidrato pode levar à perda de sódio. Adicione pitada de sal marinho às refeições. Magnésio se necessário.</div>
+          </div>
+        </div>
+        <div class="num-card">
+          <div class="n">03</div>
+          <div>
+            <div class="t">Combatendo o desânimo</div>
+            <div class="d">Fadiga inicial é comum enquanto o corpo aprende a usar gordura como combustível. Hidrate-se e priorize o sono.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout safe" style="margin-top: 8mm;">
+        <div class="icon">✓</div>
+        <div>
+          <div class="title">Tudo isso é passageiro</div>
+          <div class="body">Esses desafios indicam que você está no caminho certo. Persistência é fundamental nesta fase.</div>
+        </div>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">7 / 12</span></div>
+  </section>
+
+  <!-- RESULTADOS REAIS -->
+  <section class="page" data-screen-label="08 Resultados Reais">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1 smaller">Resultados reais</h1>
+          <p class="subhead">Inspiração para sua jornada</p>
+        </div>
+      </div>
+
+      <div class="stats-row" style="margin-top: 4mm;">
+        <div class="stat"><div class="num" style="font-size: 22pt; white-space: normal;">200 → 100</div><div class="label">mg/dL em 1 semana</div></div>
+        <div class="stat"><div class="num" style="font-size: 22pt; white-space: normal;">8% → 6%</div><div class="label">HbA1c no método 3D</div></div>
+        <div class="stat"><div class="num" style="font-size: 22pt; white-space: normal;">+ energia</div><div class="label">menos dores, melhor sono</div></div>
+      </div>
+
+      <h2 class="h2" style="margin-top: 8mm; margin-bottom: 4mm;">O que muitas relatam</h2>
+      <div class="col-3" style="gap: 12px;">
+        <div class="num-card"><div class="n">★</div><div><div class="t">Redução significativa da glicemia</div><div class="d">Quedas expressivas em apenas 1 semana — saindo de 200 mg/dL para perto de 100.</div></div></div>
+        <div class="num-card"><div class="n">★</div><div><div class="t">Melhora da hemoglobina glicada</div><div class="d">Alunas que continuam no método 3D reduzem a HbA1c de 8%+ para menos de 6%.</div></div></div>
+        <div class="num-card"><div class="n">★</div><div><div class="t">Benefícios além da glicemia</div><div class="d">Sono melhor, mais disposição, menos dores e perda de peso gradual.</div></div></div>
+      </div>
+
+      <div class="pull-block" style="margin-top: 8mm;">
+        <div class="bar"></div>
+        <p class="pull-quote">Esses resultados não vêm só do cardápio — vêm do conhecimento aplicado e da adaptação individual. Cada corpo é único.</p>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">8 / 12</span></div>
+  </section>
+
+  <!-- TIPOS DE DIABETES -->
+  <section class="page" data-screen-label="09 Tipos de Diabetes">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1 smaller">Tipos de diabetes</h1>
+          <p class="subhead">Para entender o que está em jogo</p>
+        </div>
+      </div>
+
+      <div class="col-3" style="gap: 12px; margin-top: 4mm;">
+        <div class="card-soft" style="padding: 18px 22px;">
+          <div class="eyebrow muted" style="margin-bottom: 6px; font-size: 11pt;">Tipo 1</div>
+          <h3 style="font-family: var(--serif); font-style: italic; font-size: 20pt; margin: 0 0 8px; color: var(--burgundy);">Autoimune</h3>
+          <p class="body" style="font-size: 13pt; margin: 0;">O sistema imunológico ataca as células beta do pâncreas, levando à deficiência total ou quase total de insulina. Geralmente surge na infância ou adolescência. Exige insulinoterapia.</p>
+        </div>
+        <div class="card-soft" style="padding: 18px 22px; border-left: 4px solid var(--accent);">
+          <div class="eyebrow" style="margin-bottom: 6px; font-size: 11pt;">Tipo 2</div>
+          <h3 style="font-family: var(--serif); font-style: italic; font-size: 20pt; margin: 0 0 8px; color: var(--accent);">Resistência insulínica</h3>
+          <p class="body" style="font-size: 13pt; margin: 0;">As células não respondem bem à insulina. Tradicionalmente ligado ao envelhecimento, mas aumenta entre jovens devido a alimentação e estilo de vida. <strong>Reversível.</strong></p>
+        </div>
+        <div class="card-soft" style="padding: 18px 22px;">
+          <div class="eyebrow muted" style="margin-bottom: 6px; font-size: 11pt;">Outros</div>
+          <h3 style="font-family: var(--serif); font-style: italic; font-size: 20pt; margin: 0 0 8px; color: var(--burgundy);">Pré, gestacional, LADA, MODY</h3>
+          <p class="body" style="font-size: 13pt; margin: 0;"><strong>Pré-diabetes:</strong> fase inicial. <strong>Gestacional:</strong> surge na gravidez. <strong>LADA:</strong> autoimune lento. <strong>MODY:</strong> formas raras ligadas a mutações genéticas.</p>
+        </div>
+      </div>
+
+      <div class="callout info" style="margin-top: 8mm;">
+        <div class="icon">i</div>
+        <div>
+          <div class="title">Diagnóstico correto importa</div>
+          <div class="body">O diabetes é uma condição complexa e multifatorial — vai além dos números de glicemia. Por isso, a abordagem precisa ser personalizada.</div>
+        </div>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">9 / 12</span></div>
+  </section>
+
+  <!-- EVOLUÇÃO DAS DIRETRIZES + ELES QUEREM NOSSO BEM -->
+  <section class="page" data-screen-label="10 Diretrizes nutricionais">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1 smaller">Evolução das diretrizes</h1>
+          <p class="subhead">E o que está por trás delas</p>
+        </div>
+      </div>
+
+      <p class="lead">Desde os anos 70, as recomendações nutricionais mudaram com consequências profundas. Essas mudanças coincidiram com o aumento alarmante de casos de diabetes tipo 2 e obesidade.</p>
+
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-when">Anos 70–80</div>
+          <h3 class="tl-title">Reduzir gorduras, aumentar carboidratos</h3>
+          <p class="tl-desc">Recomendações baseadas em estudos limitados e influenciadas por interesses da indústria.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-when">Anos 90–2000</div>
+          <h3 class="tl-title">Boom dos "low-fat" e "fat-free"</h3>
+          <p class="tl-desc">Produtos ricos em açúcares e carboidratos refinados se multiplicam — coincidindo com aumento expressivo de diabetes tipo 2.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-when">2010 — hoje</div>
+          <h3 class="tl-title">Evidências questionam o paradigma</h3>
+          <p class="tl-desc">Pesquisas mostram benefícios de dietas com menor carga glicêmica e mais gorduras saudáveis.</p>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top: 6mm;">
+        <div class="icon warn">?</div>
+        <div>
+          <div class="title warn">Quem realmente quer o nosso bem?</div>
+          <div class="body">Será que <strong>indústria alimentícia, farmacêutica e políticos</strong> lucram com a sua saúde — ou com a sua doença? O paciente diabético muitas vezes sofre falta de conhecimento e suporte real. É hora de buscar autonomia através do conhecimento.</div>
+        </div>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">10 / 12</span></div>
+  </section>
+
+  <!-- IMPACTO SISTÊMICO + JORNADA -->
+  <section class="page" data-screen-label="11 Impacto Sistêmico">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1 smaller">Impacto sistêmico</h1>
+          <p class="subhead">O diabetes afeta muito mais que a glicose</p>
+        </div>
+      </div>
+
+      <p class="lead">O diabetes não é uma doença isolada do metabolismo da glicose. É uma condição sistêmica que <strong>impacta praticamente todos os órgãos</strong> por mecanismos inflamatórios e metabólicos.</p>
+
+      <div class="sys-grid">
+        <div class="sys-card"><h4>Sistema Nervoso</h4><p>Comprometimento cognitivo, neuropatia, alterações de humor e depressão.</p></div>
+        <div class="sys-card"><h4>Cardiovascular</h4><p>Aumento de risco de infartos, AVCs e hipertensão.</p></div>
+        <div class="sys-card"><h4>Sistema Renal</h4><p>Danos progressivos aos rins, podendo levar à falência renal.</p></div>
+        <div class="sys-card"><h4>Músculo-Esquelético</h4><p>Dores articulares, fibromialgia, sarcopenia e fragilidade óssea.</p></div>
+        <div class="sys-card" style="grid-column: span 2;"><h4>Digestivo</h4><p>Disbiose intestinal, esteatose hepática e alterações na absorção de nutrientes.</p></div>
+      </div>
+
+      <div class="pull-block" style="margin-top: 6mm;">
+        <div class="bar"></div>
+        <p class="pull-quote">Assim como o diabetes se desenvolve ao longo de décadas, a reversão exige tempo, persistência e paciência.</p>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">11 / 12</span></div>
+  </section>
+
+  <!-- COMPROMISSO COM A MUDANÇA -->
+  <section class="page" data-screen-label="12 Compromisso">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1 smaller">Compromisso com a mudança</h1>
+          <p class="subhead">Construindo o seu futuro</p>
+        </div>
+      </div>
+
+      <p class="lead">Cada escolha que você faz hoje molda o seu amanhã metabólico. As mudanças que iniciamos não são temporárias — são o começo de uma nova forma de viver.</p>
+
+      <h2 class="h2" style="margin-top: 8mm; margin-bottom: 4mm;">Os 4 estágios da transformação</h2>
+      <div class="col-2" style="gap: 12px;">
+        <div class="num-card"><div class="n">01</div><div><div class="t">Conhecimento</div><div class="d">Entender os mecanismos do diabetes e da saúde metabólica.</div></div></div>
+        <div class="num-card"><div class="n">02</div><div><div class="t">Implementação</div><div class="d">Aplicar estratégias de alimentação e estilo de vida.</div></div></div>
+        <div class="num-card"><div class="n">03</div><div><div class="t">Consistência</div><div class="d">Manter os novos hábitos de forma sustentável.</div></div></div>
+        <div class="num-card"><div class="n">04</div><div><div class="t">Transformação</div><div class="d">Colher os frutos da regeneração metabólica completa.</div></div></div>
+      </div>
+
+      <div class="cta-block">
+        <h2 class="cta-title"><span class="accent">Pergunte-se:</span> qual versão de mim quero ser daqui a 5, 10 ou 20 anos?</h2>
+        <p class="cta-text">A resposta provavelmente inclui vitalidade, independência e bem-estar. Esse caminho começa hoje — em cada refeição equilibrada, cada conhecimento adquirido, cada hábito transformado.</p>
+        <div class="cta-sign">Com carinho, Bela.</div>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">12 / 12</span></div>
+  </section>
+
+</div>
+<script>
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(() => {
+    document.body.style.transform = 'translateZ(0)';
+    requestAnimationFrame(() => { document.body.style.transform = ''; });
+  });
+}
+</script>
+</body>
+</html>

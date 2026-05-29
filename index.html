@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="assets/protocolo-3d-logo.png">
+<title>Materiais do Desafio · Jejum Glicêmico 2D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@1,400;1,500;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/bela-style.css">
+<style>
+  body { background: #cfc7cb; padding: 0; font-size: 16pt; }
+  .hub {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 60px 32px 80px;
+  }
+  .hub-head {
+    text-align: center;
+    margin-bottom: 36px;
+    position: relative;
+  }
+  .hub-head .logo { width: 200px; margin: 0 auto 12px; display: block; }
+  .hub-head .eyebrow {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 12pt;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .hub-head h1 {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 64pt;
+    line-height: 1;
+    color: var(--ink);
+    margin: 14px 0 8px;
+    letter-spacing: -0.01em;
+  }
+  .hub-head h1 .accent { color: var(--accent); }
+  .hub-head p.sub {
+    font-family: var(--sans);
+    font-size: 16pt;
+    line-height: 1.5;
+    color: var(--body);
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  .hub-section {
+    margin-top: 56px;
+  }
+  .hub-section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .hub-section-title {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 28pt;
+    line-height: 1.1;
+    color: var(--ink);
+    margin: 0;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .hub-section-count {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+  .hub-section-count {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 11pt;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .hub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 16px;
+  }
+  .hub-card {
+    display: block;
+    background: linear-gradient(180deg, #ffffff 0%, #fef4f8 70%, #fce7ee 100%);
+    border-radius: 16px;
+    padding: 26px 28px 28px;
+    text-decoration: none;
+    color: var(--ink);
+    border: 1px solid #f0dde3;
+    transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+    box-shadow: 0 4px 14px rgba(15,15,15,0.04);
+    position: relative;
+    overflow: hidden;
+  }
+  .hub-card::before {
+    content: "";
+    position: absolute;
+    top: -20px; right: -20px;
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fcd6e2 0%, rgba(252,214,226,0) 70%);
+    pointer-events: none;
+  }
+  .hub-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(232,28,146,0.12);
+  }
+  .hub-card .tag {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 10.5pt;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .hub-card .tag .dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+  }
+  .hub-card h3 {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 26pt;
+    line-height: 1.05;
+    color: var(--ink);
+    margin: 10px 0 8px;
+    position: relative;
+    z-index: 1;
+    overflow-wrap: break-word;
+    word-break: normal;
+    text-wrap: balance;
+  }
+  .hub-card p {
+    font-family: var(--sans);
+    font-size: 13.5pt;
+    line-height: 1.45;
+    color: var(--body);
+    margin: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .hub-card .pages {
+    font-family: var(--sans);
+    font-size: 11pt;
+    color: var(--burgundy);
+    margin-top: 14px;
+    display: block;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .hub-card .pages::after {
+    content: " \2192";
+    color: var(--accent);
+    font-size: 14pt;
+    transition: margin-left .15s ease;
+    margin-left: 4px;
+    display: inline-block;
+  }
+  .hub-card:hover .pages::after { margin-left: 8px; }
+
+  /* Diet variants */
+  .hub-card.diet-azul     .tag, .hub-card.diet-azul h3     { color: var(--diet-azul); }
+  .hub-card.diet-vermelha .tag, .hub-card.diet-vermelha h3 { color: var(--diet-vermelha); }
+  .hub-card.diet-verde    .tag, .hub-card.diet-verde h3    { color: var(--diet-verde); }
+  .hub-card.diet-preta    .tag, .hub-card.diet-preta h3    { color: var(--diet-preta); }
+  .hub-card.diet-azul     .tag .dot { background: var(--diet-azul); }
+  .hub-card.diet-vermelha .tag .dot { background: var(--diet-vermelha); }
+  .hub-card.diet-verde    .tag .dot { background: var(--diet-verde); }
+  .hub-card.diet-preta    .tag .dot { background: var(--diet-preta); }
+  .hub-card.diet-azul:hover     { border-color: var(--diet-azul); }
+  .hub-card.diet-vermelha:hover { border-color: var(--diet-vermelha); }
+  .hub-card.diet-verde:hover    { border-color: var(--diet-verde); }
+  .hub-card.diet-preta:hover    { border-color: var(--diet-preta); }
+
+  /* featured (Cronograma) bigger card */
+  .hub-card.featured {
+    grid-column: span 2;
+    background:
+      radial-gradient(ellipse 90% 55% at 100% 0%, #fcd6e2 0%, rgba(252,214,226,0) 60%),
+      linear-gradient(180deg, #ffffff 0%, #fef4f8 38%, #fce7ee 100%);
+    padding: 32px 40px;
+  }
+  .hub-card.featured h3 { font-size: 38pt; }
+  .hub-card.featured p { font-size: 15pt; max-width: 480px; }
+
+  /* footer */
+  .hub-foot {
+    margin-top: 80px;
+    padding-top: 28px;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    font-family: var(--sans);
+    font-size: 13pt;
+    color: #7a6970;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .hub-foot strong { color: var(--burgundy); font-style: italic; font-family: var(--serif); font-size: 15pt; }
+
+  @media (max-width: 700px) {
+    .hub { padding: 36px 18px 60px; }
+    .hub-head h1 { font-size: 44pt; }
+    .hub-section-title { font-size: 24pt; }
+    .hub-card.featured { grid-column: span 1; padding: 26px 28px; }
+    .hub-card.featured h3 { font-size: 28pt; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hub">
+
+  <header class="hub-head">
+    <img class="logo" src="assets/logo.webp" alt="Jejum Glicêmico 2D">
+    <div class="eyebrow">Turma 07 · 2026</div>
+    <h1>Materiais <span class="accent">do Desafio</span></h1>
+    <p class="sub">Tudo o que você precisa para a sua jornada à glicemia de 2 dígitos — em um só lugar, com leitura fácil em qualquer dispositivo.</p>
+  </header>
+
+  <section class="hub-section">
+    <div class="hub-section-head">
+      <h2 class="hub-section-title">Comece por aqui</h2>
+      <span class="hub-section-count">3 documentos</span>
+    </div>
+    <div class="hub-grid">
+      <a class="hub-card featured" href="protocolo3d.html">
+        <span class="tag"><span class="dot"></span>Landing principal · GitHub Pages</span>
+        <h3>Protocolo 3D</h3>
+        <p>Página de apresentação otimizada, com imagens locais, CTA de inscrição e navegação por seções — pronta para compartilhar.</p>
+        <span class="pages">Landing page · abrir</span>
+      </a>
+      <a class="hub-card" href="Cronograma Oficial.html">
+        <span class="tag"><span class="dot"></span>Material oficial · indispensável</span>
+        <h3>Cronograma Oficial</h3>
+        <p>Apresentação do Desafio, conheça a Bela, erros a evitar, dicas para o jejum, cronograma das aulas e os 7 dias de transformação.</p>
+        <span class="pages">10 páginas · abrir</span>
+      </a>
+      <a class="hub-card" href="Lista de Compras.html">
+        <span class="tag"><span class="dot"></span>Antes de começar</span>
+        <h3>Lista de Compras &amp; Substituição</h3>
+        <p>Tudo o que comprar para os 7 dias + tabela completa de substituições para personalizar suas refeições.</p>
+        <span class="pages">7 páginas · abrir</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="hub-section">
+    <div class="hub-section-head">
+      <h2 class="hub-section-title">Sua dieta personalizada</h2>
+      <span class="hub-section-count">4 planos</span>
+    </div>
+    <div class="hub-grid">
+      <a class="hub-card diet-azul" href="Dieta Azul.html">
+        <span class="tag"><span class="dot"></span>Dieta Azul</span>
+        <h3>Cuidado extra</h3>
+        <p>Para quem precisa de proteínas e gorduras boas para controlar a glicemia com mais firmeza.</p>
+        <span class="pages">6 páginas · abrir</span>
+      </a>
+      <a class="hub-card diet-vermelha" href="Dieta Vermelha.html">
+        <span class="tag"><span class="dot"></span>Dieta Vermelha</span>
+        <h3>Equilíbrio</h3>
+        <p>Para quem está no meio do caminho — integrais, proteínas leves, jejuns suaves.</p>
+        <span class="pages">6 páginas · abrir</span>
+      </a>
+      <a class="hub-card diet-verde" href="Dieta Verde.html">
+        <span class="tag"><span class="dot"></span>Dieta Verde</span>
+        <h3>Recomeço</h3>
+        <p>Cheia de vitalidade. Alimentos naturais e jejuns curtinhos para quem começa.</p>
+        <span class="pages">6 páginas · abrir</span>
+      </a>
+      <a class="hub-card diet-preta" href="Dieta Preta.html">
+        <span class="tag"><span class="dot"></span>Dieta Preta</span>
+        <h3>Cuidado especial</h3>
+        <p>Para quem usa medicamentos. Segura, com proteínas ajustadas e atenção redobrada.</p>
+        <span class="pages">6 páginas · abrir</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="hub-section">
+    <div class="hub-section-head">
+      <h2 class="hub-section-title">Aulas da semana</h2>
+      <span class="hub-section-count">5 aulas · 7h</span>
+    </div>
+    <div class="hub-grid">
+      <a class="hub-card" href="Aula 1 - Mapa Metabólico.html">
+        <span class="tag"><span class="dot"></span>Segunda · Aula 01</span>
+        <h3>O seu Mapa Metabólico</h3>
+        <p>Um raio-X do seu corpo antes da virada. Worksheet para preencher e comparar no final da semana.</p>
+        <span class="pages">9 páginas · abrir</span>
+      </a>
+      <a class="hub-card" href="Aula 2 - Corpo em Alerta.html">
+        <span class="tag"><span class="dot"></span>Terça · Aula 02</span>
+        <h3>Corpo em Alerta</h3>
+        <p>Como seu corpo processa a glicose, picos glicêmicos e os erros que sabotam a saúde metabólica.</p>
+        <span class="pages">10 páginas · abrir</span>
+      </a>
+      <a class="hub-card" href="Aula 3 - Alimento Sob Controle.html">
+        <span class="tag"><span class="dot"></span>Quarta · Aula 03</span>
+        <h3>Alimento Sob Controle</h3>
+        <p>A relação entre alimentos e hormônios. Mitos, dúvidas e a microbiota intestinal.</p>
+        <span class="pages">10 páginas · abrir</span>
+      </a>
+      <a class="hub-card" href="Aula 4 - Transformação Real.html">
+        <span class="tag"><span class="dot"></span>Quinta · Aula 04</span>
+        <h3>Transformação Real</h3>
+        <p>Desmistificando o diabetes. Tipos de diabetes, ajustes no cardápio e harmonia metabólica.</p>
+        <span class="pages">12 páginas · abrir</span>
+      </a>
+      <a class="hub-card" href="Aula 5 - Mapa da Virada.html">
+        <span class="tag"><span class="dot"></span>Sexta · Aula 05</span>
+        <h3>Mapa da Virada</h3>
+        <p>A rota para os próximos 6 meses. Conteúdo entregue ao vivo às 7h.</p>
+        <span class="pages">3 páginas · abrir</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="hub-section">
+    <div class="hub-section-head">
+      <h2 class="hub-section-title">Guias de apoio</h2>
+      <span class="hub-section-count">2 guias</span>
+    </div>
+    <div class="hub-grid">
+      <a class="hub-card" href="Guia Saúde Intestinal.html">
+        <span class="tag"><span class="dot"></span>Guia completo</span>
+        <h3>Saúde Intestinal</h3>
+        <p>5 passos para um intestino saudável, Escala de Bristol, suplementos e como resolver desconfortos comuns.</p>
+        <span class="pages">8 páginas · abrir</span>
+      </a>
+      <a class="hub-card" href="Guia de Medicamentos.html">
+        <span class="tag"><span class="dot"></span>Guia simples</span>
+        <h3>Medicamentos para Diabetes</h3>
+        <p>Como cada classe age, risco de hipoglicemia e nomes comerciais — para conversar com seu médico.</p>
+        <span class="pages">7 páginas · abrir</span>
+      </a>
+    </div>
+  </section>
+
+  <footer class="hub-foot">
+    <strong>Isabela Clerot · Nutricionista</strong>
+    <span>Material exclusivo do Desafio Jejum Glicêmico 2D · Turma 07 · 2026</span>
+  </footer>
+
+</div>
+
+</body>
+</html>

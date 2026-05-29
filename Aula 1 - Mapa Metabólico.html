@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Aula 1 · O Raio-X · O seu Mapa Metabólico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@1,400;1,500;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/bela-style.css">
+<style>
+  /* form-style worksheet helpers */
+  .indicator-row {
+    display: grid;
+    grid-template-columns: 1.4fr 200px 70px;
+    gap: 18px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: center;
+  }
+  .indicator-label { font-family: var(--sans); font-weight: 600; font-size: 15pt; color: var(--ink); line-height: 1.25; }
+  .indicator-hint { font-family: var(--sans); font-size: 12.5pt; color: var(--body); line-height: 1.3; margin-top: 4px; }
+  .scale-boxes { display: flex; gap: 4px; }
+  .scale-boxes .b {
+    width: 30px; height: 30px;
+    border: 1.5px solid var(--rule);
+    border-radius: 6px;
+    background: rgba(255,255,255,0.6);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--sans); font-weight: 600; font-size: 11pt; color: var(--burgundy);
+  }
+  .ind-note {
+    width: 60px; height: 32px;
+    border: 1.5px dashed var(--accent);
+    border-radius: 6px;
+    background: rgba(255,255,255,0.4);
+  }
+  /* writing line */
+  .write-line {
+    border-bottom: 1px solid var(--rule);
+    height: 32px;
+    margin-bottom: 6px;
+  }
+  /* glucose log */
+  .glu-table {
+    background: var(--card); border-radius: 14px;
+    padding: 16px 22px;
+    margin-top: 14px;
+  }
+  .glu-day-title {
+    font-family: var(--serif); font-style: italic; font-size: 26pt;
+    color: var(--accent); margin: 0 0 10px;
+  }
+  .glu-row {
+    display: grid;
+    grid-template-columns: 1fr 100px 100px 100px;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--rule-soft);
+    font-family: var(--sans); font-size: 14pt;
+    align-items: center;
+  }
+  .glu-row.head {
+    font-weight: 700; color: var(--burgundy); font-size: 11.5pt;
+    letter-spacing: 0.10em; text-transform: uppercase;
+    border-bottom: 2px solid var(--accent);
+    padding: 4px 0 8px;
+  }
+  .glu-cell-empty {
+    height: 30px; border-radius: 6px; background: rgba(255,255,255,0.6);
+    border: 1px dashed var(--rule);
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="drop" viewBox="0 0 24 32"><path d="M12 2 C 8 13 3 17 3 22 a9 9 0 0 0 18 0 C 21 17 16 13 12 2 z" fill="currentColor"/></symbol>
+  </defs>
+</svg>
+
+<div class="pages">
+
+  <!-- COVER -->
+  <section class="page cover" data-screen-label="01 Capa">
+    <div class="cover-top"><img class="logo-big" src="assets/logo.webp" alt="Jejum Glicêmico 2D"></div>
+    <div class="cover-divider"></div>
+    <div class="cover-eyebrow">Aula 01 · Segunda-feira · 7h</div>
+    <h1 class="cover-title smaller">
+      <span class="line1">O Raio-X</span>
+      <span class="line2">do seu corpo</span>
+    </h1>
+    <p class="cover-subtitle" style="position: absolute; top: 130mm;">O seu Mapa Metabólico — antes de começar a virada</p>
+
+    <div class="sticker" style="--size: 140px; position: absolute; top: 152mm; right: 16mm; z-index: 5;">
+      <span class="stamp-bg"><svg viewBox="0 0 100 100"><path d="M 95.711 44.850 L 100.000 50.000 L 95.711 55.150 L 98.746 61.126 L 93.419 65.193 L 95.048 71.694 L 88.949 74.473 L 89.092 81.174 L 82.527 82.527 L 81.174 89.092 L 74.473 88.949 L 71.694 95.048 L 65.193 93.419 L 61.126 98.746 L 55.150 95.711 L 50.000 100.000 L 44.850 95.711 L 38.874 98.746 L 34.807 93.419 L 28.306 95.048 L 25.527 88.949 L 18.826 89.092 L 17.473 82.527 L 10.908 81.174 L 11.051 74.473 L 4.952 71.694 L 6.581 65.193 L 1.254 61.126 L 4.289 55.150 L 0.000 50.000 L 4.289 44.850 L 1.254 38.874 L 6.581 34.807 L 4.952 28.306 L 11.051 25.527 L 10.908 18.826 L 17.473 17.473 L 18.826 10.908 L 25.527 11.051 L 28.306 4.952 L 34.807 6.581 L 38.874 1.254 L 44.850 4.289 L 50.000 0.000 L 55.150 4.289 L 61.126 1.254 L 65.193 6.581 L 71.694 4.952 L 74.473 11.051 L 81.174 10.908 L 82.527 17.473 L 89.092 18.826 L 88.949 25.527 L 95.048 28.306 L 93.419 34.807 L 98.746 38.874 L 95.711 44.850 Z" fill="#E81C92"/></svg></span>
+      <span class="stamp-ring"></span><span class="stamp-shine"></span>
+      <span class="top">glicemia de</span>
+      <span class="big">2 dígitos</span>
+      <span class="bot">em 7 dias</span>
+    </div>
+
+    <div style="position: absolute; top: 165mm; left: var(--pad-x); right: var(--pad-x);">
+      <p class="lead" style="font-size: 17pt; max-width: 130mm;">Antes de qualquer mudança, vamos olhar com calma para onde você está agora. É esse retrato que vai te mostrar o quanto você avançou ao final da semana.</p>
+    </div>
+
+    <div style="position: absolute; bottom: 28mm; left: var(--pad-x); right: var(--pad-x);">
+      <div class="callout info">
+        <div class="icon">i</div>
+        <div>
+          <div class="title">Como usar este caderno</div>
+          <div class="body">Preencha o Mapa Metabólico hoje, na aula de segunda. Repita no domingo. Guarde os dois resultados para comparar — você vai se surpreender.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">1 / 9</span></div>
+  </section>
+
+  <!-- QUEM É A SUA NUTRI -->
+  <section class="page" data-screen-label="02 Quem é a sua Nutri">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1">Quem é a sua Nutri</h1>
+          <p class="subhead">Quem vai te guiar nessa semana</p>
+        </div>
+      </div>
+
+      <div class="nutri-grid">
+        <div>
+          <h2 class="nutri-name">Isabela Clerot</h2>
+          <div class="nutri-eyebrow">Nutricionista · Remissão de Diabetes Tipo 2</div>
+          <div class="nutri-bio">
+            <p>Sou apaixonada por ajudar diabéticos a conquistarem a remissão do diabetes tipo 2. Minha jornada começou após enfrentar pré-diabetes e ganho de peso aos 30 anos.</p>
+            <p style="color: var(--ink);">Hoje, com base em evidências científicas, já ajudei mais de 20.000 pessoas a sair do ciclo de remédios e picos de glicemia.</p>
+            <p style="color: var(--ink);">Estou aqui para te guiar com estratégias práticas, alimentação de verdade e muito carinho.</p>
+          </div>
+        </div>
+        <div class="nutri-photo-wrap">
+          <div class="nutri-photo" role="img" aria-label="Isabela Clerot"></div>
+        </div>
+      </div>
+
+      <div class="stats-row" style="margin-top: 8mm;">
+        <div class="stat"><div class="num">20.000+</div><div class="label">pessoas atendidas</div></div>
+        <div class="stat"><div class="num">7 dias</div><div class="label">para virar a chave</div></div>
+        <div class="stat"><div class="num">7h</div><div class="label">aulas diárias</div></div>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">2 / 9</span></div>
+  </section>
+
+  <!-- MAPA METABÓLICO — INDICADORES -->
+  <section class="page" data-screen-label="03 Mapa Metabólico">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1 smaller">Mapa Metabólico</h1>
+          <p class="subhead">Preencha hoje. Depois, novamente, no final do desafio.</p>
+        </div>
+      </div>
+
+      <p class="body" style="margin-bottom: 4mm;">Para cada indicador, marque uma nota de <strong>0 a 10</strong> conforme você se sente hoje. No final da semana, refaça o exercício e compare a sua evolução metabólica, física e emocional.</p>
+
+      <div class="card-soft" style="padding: 6px 26px 12px;">
+        <div class="indicator-row" style="border-bottom: 2px solid var(--accent); font-weight: 700; color: var(--burgundy); font-size: 11.5pt; letter-spacing: 0.10em; text-transform: uppercase;">
+          <div>Indicador</div>
+          <div>Sua nota (0–10)</div>
+          <div style="text-align: center;">Anote</div>
+        </div>
+        <div class="indicator-row">
+          <div><div class="indicator-label">Energia ao acordar</div><div class="indicator-hint">Você acorda disposta ou pesada?</div></div>
+          <div class="scale-boxes"><span class="b">0</span><span class="b">2</span><span class="b">4</span><span class="b">6</span><span class="b">8</span><span class="b">10</span></div>
+          <div class="ind-note"></div>
+        </div>
+        <div class="indicator-row">
+          <div><div class="indicator-label">Fome ao longo do dia</div><div class="indicator-hint">10 = controlada. 0 = constante.</div></div>
+          <div class="scale-boxes"><span class="b">0</span><span class="b">2</span><span class="b">4</span><span class="b">6</span><span class="b">8</span><span class="b">10</span></div>
+          <div class="ind-note"></div>
+        </div>
+        <div class="indicator-row">
+          <div><div class="indicator-label">Qualidade do sono</div><div class="indicator-hint">Dorme bem? Acorda à noite?</div></div>
+          <div class="scale-boxes"><span class="b">0</span><span class="b">2</span><span class="b">4</span><span class="b">6</span><span class="b">8</span><span class="b">10</span></div>
+          <div class="ind-note"></div>
+        </div>
+        <div class="indicator-row">
+          <div><div class="indicator-label">Disposição para atividades</div><div class="indicator-hint">Vontade de se mexer e fazer coisas.</div></div>
+          <div class="scale-boxes"><span class="b">0</span><span class="b">2</span><span class="b">4</span><span class="b">6</span><span class="b">8</span><span class="b">10</span></div>
+          <div class="ind-note"></div>
+        </div>
+        <div class="indicator-row">
+          <div><div class="indicator-label">Humor</div><div class="indicator-hint">Tranquilo(a), irritado(a), ansioso(a)?</div></div>
+          <div class="scale-boxes"><span class="b">0</span><span class="b">2</span><span class="b">4</span><span class="b">6</span><span class="b">8</span><span class="b">10</span></div>
+          <div class="ind-note"></div>
+        </div>
+        <div class="indicator-row">
+          <div><div class="indicator-label">Sensação de inchaço</div><div class="indicator-hint">10 = nenhum. 0 = constante.</div></div>
+          <div class="scale-boxes"><span class="b">0</span><span class="b">2</span><span class="b">4</span><span class="b">6</span><span class="b">8</span><span class="b">10</span></div>
+          <div class="ind-note"></div>
+        </div>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">3 / 9</span></div>
+  </section>
+
+  <!-- REFLEXÃO + RESULTADO -->
+  <section class="page" data-screen-label="04 Reflexão">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1 smaller">Suas notas</h1>
+          <p class="subhead">Reflexão rápida — responda com calma, sem julgamento</p>
+        </div>
+      </div>
+
+      <div class="card-soft" style="margin-bottom: 5mm;">
+        <h3 class="h3">O que você espera melhorar ao participar do Desafio?</h3>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+      </div>
+
+      <div class="card-soft" style="margin-bottom: 5mm;">
+        <h3 class="h3">Como você se sente em relação ao seu metabolismo hoje?</h3>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+      </div>
+
+      <div class="card-accent">
+        <div class="eyebrow">Resultado Final</div>
+        <h3 style="font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 28pt; margin: 6px 0 8px; color: var(--ink);">Some todas as suas notas: <span style="display: inline-block; min-width: 110px; border-bottom: 2px solid var(--accent); color: var(--accent);">&nbsp;</span></h3>
+        <p class="body" style="margin: 0; color: var(--ink);">Guarde esse resultado. Faremos o mesmo exercício no final do desafio para você ver, em números, o quanto avançou.</p>
+      </div>
+
+      <div class="pull-block" style="margin-top: 6mm;">
+        <div class="bar"></div>
+        <p class="pull-quote">A escala importante não é o quanto você se cobra — é o quanto você cresce.</p>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">4 / 9</span></div>
+  </section>
+
+  <!-- MEDIDAS DE GLICOSE — SEGUNDA -->
+  <section class="page" data-screen-label="05 Medidas · Segunda">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1 smaller">Medidas de glicose</h1>
+          <p class="subhead">Anote tudo no Dia 1 — Segunda-feira</p>
+        </div>
+      </div>
+
+      <p class="body" style="margin-bottom: 4mm;">Registre cada medição feita ao longo do dia, como você aprendeu na aula. Especialmente importante: medir <strong>1 hora após o início de cada refeição</strong> (não depois do fim).</p>
+
+      <div class="glu-table">
+        <h2 class="glu-day-title">Segunda-feira</h2>
+        <div class="glu-row head">
+          <div>Momento</div><div>Em jejum</div><div>1h após</div><div>Antes de dormir</div>
+        </div>
+        <div class="glu-row">
+          <div><strong>Café da manhã</strong></div><div class="glu-cell-empty"></div><div class="glu-cell-empty"></div><div></div>
+        </div>
+        <div class="glu-row">
+          <div><strong>Almoço</strong></div><div></div><div class="glu-cell-empty"></div><div></div>
+        </div>
+        <div class="glu-row">
+          <div><strong>Lanche</strong></div><div></div><div class="glu-cell-empty"></div><div></div>
+        </div>
+        <div class="glu-row">
+          <div><strong>Jantar</strong></div><div></div><div class="glu-cell-empty"></div><div class="glu-cell-empty"></div>
+        </div>
+      </div>
+
+      <div class="card-soft" style="margin-top: 6mm;">
+        <div class="eyebrow">Observações do dia</div>
+        <div class="write-line" style="margin-top: 8px;"></div>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">5 / 9</span></div>
+  </section>
+
+  <!-- MEDIDAS DE GLICOSE — SÁBADO -->
+  <section class="page" data-screen-label="06 Medidas · Sábado">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1 smaller">Medidas de glicose</h1>
+          <p class="subhead">Final da semana — Sábado, dia 6 do desafio</p>
+        </div>
+      </div>
+
+      <p class="body" style="margin-bottom: 4mm;">Anote do mesmo jeito que você fez na segunda. Compare lado a lado — a diferença vai te emocionar.</p>
+
+      <div class="glu-table">
+        <h2 class="glu-day-title">Sábado</h2>
+        <div class="glu-row head">
+          <div>Momento</div><div>Em jejum</div><div>1h após</div><div>Antes de dormir</div>
+        </div>
+        <div class="glu-row">
+          <div><strong>Café da manhã</strong></div><div class="glu-cell-empty"></div><div class="glu-cell-empty"></div><div></div>
+        </div>
+        <div class="glu-row">
+          <div><strong>Almoço</strong></div><div></div><div class="glu-cell-empty"></div><div></div>
+        </div>
+        <div class="glu-row">
+          <div><strong>Lanche</strong></div><div></div><div class="glu-cell-empty"></div><div></div>
+        </div>
+        <div class="glu-row">
+          <div><strong>Jantar</strong></div><div></div><div class="glu-cell-empty"></div><div class="glu-cell-empty"></div>
+        </div>
+      </div>
+
+      <div class="callout safe" style="margin-top: 6mm;">
+        <div class="icon">✓</div>
+        <div>
+          <div class="title">Compare com o dia 1</div>
+          <div class="body">Aproxime as duas páginas: a melhora vai aparecer ali, em mg/dL. Lembre-se: cada queda é um voto de confiança no seu corpo.</div>
+        </div>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">6 / 9</span></div>
+  </section>
+
+  <!-- CRONOGRAMA -->
+  <section class="page" data-screen-label="07 Cronograma">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1 smaller">Cronograma das Aulas</h1>
+          <p class="subhead">Todos os dias às 7h — não falte</p>
+        </div>
+      </div>
+
+      <div class="schedule">
+        <div class="schedule-row"><div class="day-badge">SEG</div><div class="time">7h</div><div><h3 class="lesson-title">O Raio-X da sua Saúde</h3><p class="lesson-desc">Descubra a verdade escondida do seu corpo e tome o controle.</p></div></div>
+        <div class="schedule-row"><div class="day-badge">TER</div><div class="time">7h</div><div><h3 class="lesson-title">Corpo em Alerta</h3><p class="lesson-desc">Identifique os alertas do seu metabolismo antes que seja tarde.</p></div></div>
+        <div class="schedule-row"><div class="day-badge">QUA</div><div class="time">7h</div><div><h3 class="lesson-title">Alimento Sob Controle</h3><p class="lesson-desc">Cada refeição vira um passo rumo à liberdade metabólica.</p></div></div>
+        <div class="schedule-row"><div class="day-badge">QUI</div><div class="time">7h</div><div><h3 class="lesson-title">Transformação Real</h3><p class="lesson-desc">Liberte-se do peso do diabetes e viva com energia.</p></div></div>
+        <div class="schedule-row"><div class="day-badge">SEX</div><div class="time">7h</div><div><h3 class="lesson-title">Mapa da Virada</h3><p class="lesson-desc">Trace a rota definitiva para uma vida equilibrada.</p></div></div>
+        <div class="schedule-row"><div class="day-badge">SÁB</div><div class="time">7h</div><div><h3 class="lesson-title">Exames Decifrados</h3><p class="lesson-desc">Desvende os segredos dos seus exames.</p></div></div>
+        <div class="schedule-row"><div class="day-badge">DOM</div><div class="time">7h</div><div><h3 class="lesson-title">Encerramento Triunfal + Sorteio</h3><p class="lesson-desc">Celebre a sua transformação e concorra a prêmios.</p></div></div>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">7 / 9</span></div>
+  </section>
+
+  <!-- DIETAS -->
+  <section class="page" data-screen-label="08 Tipos de Dietas">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1 smaller">Tipos de Dietas</h1>
+          <p class="subhead">Personalizadas pelo seu perfil metabólico</p>
+        </div>
+      </div>
+
+      <p class="body" style="margin-bottom: 6mm;">As dietas <strong>Azul, Vermelha, Verde e Preta</strong> são personalizadas com base no seu IMC, condição metabólica e uso de medicamentos. Cada uma te leva à glicemia de 2 dígitos com segurança.</p>
+
+      <div class="col-2" style="gap: 12px;">
+        <div class="diet azul"><div class="diet-bar"></div><div><h3 class="diet-name">Azul</h3><p class="diet-desc">Cuidado extra para controlar a glicemia. Proteínas e gorduras boas, saciedade e energia.</p></div></div>
+        <div class="diet vermelha"><div class="diet-bar"></div><div><h3 class="diet-name">Vermelha</h3><p class="diet-desc">Para quem está no meio do caminho. Integrais, proteínas leves e fibras, jejuns suaves.</p></div></div>
+        <div class="diet verde"><div class="diet-bar"></div><div><h3 class="diet-name">Verde</h3><p class="diet-desc">Recomeço cheio de vitalidade. Alimentos naturais, carboidratos leves, jejuns curtinhos.</p></div></div>
+        <div class="diet preta"><div class="diet-bar"></div><div><h3 class="diet-name">Preta</h3><p class="diet-desc">Para quem usa medicamentos. Segura, com proteínas ajustadas e jejuns bem orientados.</p></div></div>
+      </div>
+
+      <div class="card-accent" style="margin-top: 6mm;">
+        <div class="eyebrow">Como escolho minha dieta?</div>
+        <p class="body" style="margin: 4px 0 0; color: var(--ink); font-size: 15pt;">Preencha o <strong>Pré-Diagnóstico Metabólico</strong> na área de membros. Com base nas suas respostas, você recebe um Parecer personalizado indicando a dieta ideal para o seu corpo.</p>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">8 / 9</span></div>
+  </section>
+
+  <!-- MELHORA PROGRESSIVA -->
+  <section class="page" data-screen-label="09 Melhora progressiva">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1 smaller">Melhora progressiva</h1>
+          <p class="subhead">O que esperar do seu corpo a cada dia</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 4mm; display: flex; flex-direction: column; gap: 6px;">
+        <div class="week-row" style="display: grid; grid-template-columns: 110px 1fr; gap: 24px; align-items: start; padding-top: 4px;">
+          <div style="font-family: var(--serif); font-style: italic; font-size: 38pt; color: var(--ink); text-align: right; line-height: 1;">14%</div>
+          <div><div style="font-family: var(--serif); font-style: italic; font-size: 17pt; color: var(--burgundy);">Segunda</div><p class="body" style="margin: 2px 0 4px;">Início e primeiras observações.</p><div style="height: 3px; background: var(--rule-soft); border-radius: 2px; position: relative; overflow: hidden;"><div style="position: absolute; inset: 0; width: 14%; background: var(--accent); border-radius: 2px;"></div></div></div>
+        </div>
+        <div class="week-row" style="display: grid; grid-template-columns: 110px 1fr; gap: 24px; align-items: start; padding-top: 4px;">
+          <div style="font-family: var(--serif); font-style: italic; font-size: 38pt; color: var(--accent); text-align: right; line-height: 1;">28%</div>
+          <div><div style="font-family: var(--serif); font-style: italic; font-size: 17pt; color: var(--burgundy);">Terça</div><p class="body" style="margin: 2px 0 4px;">Almoço com menos fome.</p><div style="height: 3px; background: var(--rule-soft); border-radius: 2px; position: relative; overflow: hidden;"><div style="position: absolute; inset: 0; width: 28%; background: var(--accent); border-radius: 2px;"></div></div></div>
+        </div>
+        <div class="week-row" style="display: grid; grid-template-columns: 110px 1fr; gap: 24px; align-items: start; padding-top: 4px;">
+          <div style="font-family: var(--serif); font-style: italic; font-size: 38pt; color: var(--ink); text-align: right; line-height: 1;">42%</div>
+          <div><div style="font-family: var(--serif); font-style: italic; font-size: 17pt; color: var(--burgundy);">Quarta</div><p class="body" style="margin: 2px 0 4px;">Menos fome, mais energia, menos sono.</p><div style="height: 3px; background: var(--rule-soft); border-radius: 2px; position: relative; overflow: hidden;"><div style="position: absolute; inset: 0; width: 42%; background: var(--accent); border-radius: 2px;"></div></div></div>
+        </div>
+        <div class="week-row" style="display: grid; grid-template-columns: 110px 1fr; gap: 24px; align-items: start; padding-top: 4px;">
+          <div style="font-family: var(--serif); font-style: italic; font-size: 38pt; color: var(--accent); text-align: right; line-height: 1;">56%</div>
+          <div><div style="font-family: var(--serif); font-style: italic; font-size: 17pt; color: var(--burgundy);">Quinta</div><p class="body" style="margin: 2px 0 4px;">Menos gases, menos inchaço, mais energia.</p><div style="height: 3px; background: var(--rule-soft); border-radius: 2px; position: relative; overflow: hidden;"><div style="position: absolute; inset: 0; width: 56%; background: var(--accent); border-radius: 2px;"></div></div></div>
+        </div>
+        <div class="week-row" style="display: grid; grid-template-columns: 110px 1fr; gap: 24px; align-items: start; padding-top: 4px;">
+          <div style="font-family: var(--serif); font-style: italic; font-size: 38pt; color: var(--ink); text-align: right; line-height: 1;">70%</div>
+          <div><div style="font-family: var(--serif); font-style: italic; font-size: 17pt; color: var(--burgundy);">Sexta</div><p class="body" style="margin: 2px 0 4px;">Redução da cintura, glicemia mais estável.</p><div style="height: 3px; background: var(--rule-soft); border-radius: 2px; position: relative; overflow: hidden;"><div style="position: absolute; inset: 0; width: 70%; background: var(--accent); border-radius: 2px;"></div></div></div>
+        </div>
+        <div class="week-row" style="display: grid; grid-template-columns: 110px 1fr; gap: 24px; align-items: start; padding-top: 4px;">
+          <div style="font-family: var(--serif); font-style: italic; font-size: 38pt; color: var(--accent); text-align: right; line-height: 1;">84%</div>
+          <div><div style="font-family: var(--serif); font-style: italic; font-size: 17pt; color: var(--burgundy);">Sábado</div><p class="body" style="margin: 2px 0 4px;">Pressão arterial controlada, glicemia estável.</p><div style="height: 3px; background: var(--rule-soft); border-radius: 2px; position: relative; overflow: hidden;"><div style="position: absolute; inset: 0; width: 84%; background: var(--accent); border-radius: 2px;"></div></div></div>
+        </div>
+        <div class="week-row" style="display: grid; grid-template-columns: 110px 1fr; gap: 24px; align-items: start; padding-top: 4px;">
+          <div style="font-family: var(--serif); font-style: italic; font-size: 38pt; color: var(--ink); text-align: right; line-height: 1;">100%</div>
+          <div><div style="font-family: var(--serif); font-style: italic; font-size: 17pt; color: var(--burgundy);">Domingo</div><p class="body" style="margin: 2px 0 4px;">Glicemia melhor, saúde renal e colesterol equilibrados.</p><div style="height: 3px; background: var(--rule-soft); border-radius: 2px; position: relative; overflow: hidden;"><div style="position: absolute; inset: 0; width: 100%; background: var(--accent); border-radius: 2px;"></div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">9 / 9</span></div>
+  </section>
+
+</div>
+<script>
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(() => {
+    document.body.style.transform = 'translateZ(0)';
+    requestAnimationFrame(() => { document.body.style.transform = ''; });
+  });
+}
+</script>
+</body>
+</html>

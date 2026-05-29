@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Aula 3 · Alimento Sob Controle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@1,400;1,500;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/bela-style.css">
+<style>
+  /* Hormone cards */
+  .horm-card {
+    background: var(--card-grad); border-radius: 14px;
+    padding: 16px 20px;
+  }
+  .horm-card .hd {
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .horm-card .nm {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: 22pt; color: var(--burgundy); margin: 0; line-height: 1.1;
+  }
+  .horm-card .role {
+    font-family: var(--sans); font-weight: 600; font-size: 10pt;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent);
+    display: block; margin-bottom: 2px;
+  }
+  .horm-card p { font-family: var(--sans); font-size: 13.5pt; line-height: 1.4; color: var(--ink); margin: 6px 0 0; }
+
+  /* Comparison bar visual */
+  .sugar-cmp { background: var(--card-grad); border-radius: 14px; padding: 14px 22px; margin: 3mm 0; }
+  .sugar-row { display: grid; grid-template-columns: 130px 1fr 60px; gap: 14px; align-items: center; padding: 8px 0; border-bottom: 1px dashed var(--rule); }
+  .sugar-row:last-child { border: none; }
+  .sugar-row .label { font-family: var(--sans); font-weight: 600; font-size: 15pt; color: var(--ink); }
+  .sugar-row .sub { font-family: var(--sans); font-size: 11pt; color: var(--body); }
+  .sugar-row .bar { height: 18px; background: var(--rule-soft); border-radius: 4px; position: relative; overflow: hidden; }
+  .sugar-row .bar > div { position: absolute; left: 0; top: 0; bottom: 0; background: var(--accent); border-radius: 4px; }
+  .sugar-row .val { font-family: var(--serif); font-style: italic; font-size: 22pt; color: var(--accent); text-align: right; }
+  .sugar-row.basal .bar > div { background: var(--diet-verde); }
+  .sugar-row.basal .val { color: var(--diet-verde); }
+
+  /* domino flow */
+  .domino { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 4mm; }
+  .domino .stp {
+    background: var(--card-grad); border-radius: 14px;
+    padding: 16px 18px 16px 18px; text-align: left;
+    border-left: 4px solid var(--accent);
+    position: relative;
+  }
+
+  /* Step cards (used on page 02 — intro) */
+  .step-card {
+    background: var(--card-grad); border-radius: 14px;
+    padding: 16px 20px;
+  }
+  .step-card[style*="border-left"] { padding-left: 22px; }
+  .domino .stp .n {
+    font-family: var(--serif); font-style: italic; font-size: 28pt;
+    color: var(--accent); line-height: 1; margin-bottom: 8px;
+  }
+  .domino .stp .t {
+    font-family: var(--sans); font-weight: 700; font-size: 14pt;
+    color: var(--ink); margin: 0 0 4px;
+  }
+  .domino .stp .d {
+    font-family: var(--sans); font-size: 12.5pt; line-height: 1.35; color: var(--body); margin: 0;
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="drop" viewBox="0 0 24 32"><path d="M12 2 C 8 13 3 17 3 22 a9 9 0 0 0 18 0 C 21 17 16 13 12 2 z" fill="currentColor"/></symbol>
+  </defs>
+</svg>
+
+<div class="pages">
+
+  <!-- COVER -->
+  <section class="page cover" data-screen-label="01 Capa">
+    <div class="cover-top"><img class="logo-big" src="assets/logo.webp" alt="Jejum Glicêmico 2D"></div>
+    <div class="cover-divider"></div>
+    <div class="cover-eyebrow">Aula 03 · Quarta-feira · 7h</div>
+    <h1 class="cover-title smaller">
+      <span class="line1">Alimento</span>
+      <span class="line2">Sob Controle</span>
+    </h1>
+    <p class="cover-subtitle" style="position: absolute; top: 130mm;">A chave para dominar sua glicemia</p>
+
+    <div class="sticker" style="--size: 140px; position: absolute; top: 152mm; right: 16mm; z-index: 5;">
+      <span class="stamp-bg"><svg viewBox="0 0 100 100"><path d="M 95.711 44.850 L 100.000 50.000 L 95.711 55.150 L 98.746 61.126 L 93.419 65.193 L 95.048 71.694 L 88.949 74.473 L 89.092 81.174 L 82.527 82.527 L 81.174 89.092 L 74.473 88.949 L 71.694 95.048 L 65.193 93.419 L 61.126 98.746 L 55.150 95.711 L 50.000 100.000 L 44.850 95.711 L 38.874 98.746 L 34.807 93.419 L 28.306 95.048 L 25.527 88.949 L 18.826 89.092 L 17.473 82.527 L 10.908 81.174 L 11.051 74.473 L 4.952 71.694 L 6.581 65.193 L 1.254 61.126 L 4.289 55.150 L 0.000 50.000 L 4.289 44.850 L 1.254 38.874 L 6.581 34.807 L 4.952 28.306 L 11.051 25.527 L 10.908 18.826 L 17.473 17.473 L 18.826 10.908 L 25.527 11.051 L 28.306 4.952 L 34.807 6.581 L 38.874 1.254 L 44.850 4.289 L 50.000 0.000 L 55.150 4.289 L 61.126 1.254 L 65.193 6.581 L 71.694 4.952 L 74.473 11.051 L 81.174 10.908 L 82.527 17.473 L 89.092 18.826 L 88.949 25.527 L 95.048 28.306 L 93.419 34.807 L 98.746 38.874 L 95.711 44.850 Z" fill="#E81C92"/></svg></span>
+      <span class="stamp-ring"></span><span class="stamp-shine"></span>
+      <span class="top">glicemia de</span>
+      <span class="big">2 dígitos</span>
+      <span class="bot">em 7 dias</span>
+    </div>
+
+    <div style="position: absolute; top: 165mm; left: var(--pad-x); right: var(--pad-x);">
+      <p class="lead" style="font-size: 17pt; max-width: 130mm;">A relação entre alimentos, hormônios e controle da glicemia — dos mitos comuns à interação hormonal que comanda o seu metabolismo.</p>
+    </div>
+
+    <div style="position: absolute; bottom: 28mm; left: var(--pad-x); right: var(--pad-x);">
+      <div class="callout info">
+        <div class="icon">i</div>
+        <div>
+          <div class="title">A medição muda agora</div>
+          <div class="body">Lembre-se: meça a glicose <strong>1 hora após o INÍCIO da refeição</strong> — não depois do fim. Esse detalhe muda completamente a leitura.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">1 / 10</span></div>
+  </section>
+
+  <!-- INTRODUÇÃO E CONTEXTO -->
+  <section class="page" data-screen-label="02 Introdução e contexto">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1 smaller">Introdução e contexto</h1>
+          <p class="subhead">Onde você está hoje no Desafio</p>
+        </div>
+      </div>
+
+      <p class="lead">Boas-vindas à terceira aula. Hoje o foco está em <strong>alimentos e hormônios</strong>, elementos fundamentais para compreender e controlar sua glicemia de forma efetiva.</p>
+
+      <h2 class="h2" style="margin-top: 8mm; margin-bottom: 4mm;">O que muda agora no seu dia</h2>
+      <div class="col-3" style="gap: 12px;">
+        <div class="step-card" style="grid-template-columns: 1fr;">
+          <div>
+            <div class="eyebrow" style="margin-bottom: 6px;">Café da manhã</div>
+            <h3 style="font-family: var(--serif); font-style: italic; font-size: 20pt; margin: 0 0 4px; color: var(--burgundy);">Jejum glicêmico</h3>
+            <p class="body" style="font-size: 13.5pt; margin: 0;">Já implementado nos dois primeiros dias.</p>
+          </div>
+        </div>
+        <div class="step-card" style="grid-template-columns: 1fr; border-left: 4px solid var(--accent);">
+          <div>
+            <div class="eyebrow" style="margin-bottom: 6px;">Almoço</div>
+            <h3 style="font-family: var(--serif); font-style: italic; font-size: 20pt; margin: 0 0 4px; color: var(--accent);">Restrição começa hoje</h3>
+            <p class="body" style="font-size: 13.5pt; margin: 0;">Os mesmos princípios aplicados ao almoço.</p>
+          </div>
+        </div>
+        <div class="step-card" style="grid-template-columns: 1fr;">
+          <div>
+            <div class="eyebrow" style="margin-bottom: 6px;">Jantar</div>
+            <h3 style="font-family: var(--serif); font-style: italic; font-size: 20pt; margin: 0 0 4px; color: var(--burgundy);">Próximas etapas</h3>
+            <p class="body" style="font-size: 13.5pt; margin: 0;">Em breve, expandimos o controle ao dia inteiro.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top: 8mm;">
+        <div class="icon warn">!</div>
+        <div>
+          <div class="title warn">Sobre a medição da glicose</div>
+          <div class="body">Para resultados precisos, meça <strong>exatamente 1 hora após o início da refeição</strong>, não após o término. Essa é a janela em que o pico aparece.</div>
+        </div>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">2 / 10</span></div>
+  </section>
+
+  <!-- MITOS E DÚVIDAS -->
+  <section class="page" data-screen-label="03 Mitos e dúvidas">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1 smaller">Mitos e dúvidas frequentes</h1>
+          <p class="subhead">Antes que apareça na sua cabeça</p>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 14px; margin-top: 4mm;">
+        <div class="num-card">
+          <div class="n">?</div>
+          <div>
+            <div class="t">Adoçantes e inflamação</div>
+            <div class="d">Adoçantes em xaropes <strong>geralmente não impactam</strong> a glicemia. Mas atenção: estados inflamatórios e infecções podem elevar a glicose <em>mesmo sem consumo de carboidratos</em>.</div>
+          </div>
+        </div>
+        <div class="num-card">
+          <div class="n">?</div>
+          <div>
+            <div class="t">Proteínas e glicemia</div>
+            <div class="d">Proteínas <strong>não causam picos diretos</strong>, mas alteram hormônios importantes. São excelentes aliadas para controle da fome e estabilização da glicose.</div>
+          </div>
+        </div>
+        <div class="num-card">
+          <div class="n">?</div>
+          <div>
+            <div class="t">Medicamentos e exercícios</div>
+            <div class="d">Corticoides, mesmo em uso pontual, pioram a resistência à insulina. Já o exercício pode elevar a glicemia momentaneamente — é o corpo entregando energia ao músculo.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout safe" style="margin-top: 8mm;">
+        <div class="icon">✓</div>
+        <div>
+          <div class="title">Dica para vontade de doce</div>
+          <div class="body">Use proteínas <strong>sem açúcar e sem adoçantes</strong> que impactem a glicemia. Você satisfaz o paladar sem desestabilizar a glicose.</div>
+        </div>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">3 / 10</span></div>
+  </section>
+
+  <!-- RESULTADOS -->
+  <section class="page" data-screen-label="04 Resultados de Participantes">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1 smaller">Resultados de participantes</h1>
+          <p class="subhead">Inspiração baseada em quem já fez</p>
+        </div>
+      </div>
+
+      <p class="lead">Os resultados de quem segue o programa têm sido impressionantes e motivadores: melhoras significativas na glicemia e perda de peso consistente.</p>
+      <p class="body">A remissão do diabetes é um processo gradual que exige persistência e comprometimento. Cada pequena vitória diária se soma para criar uma transformação real ao longo do tempo.</p>
+
+      <div class="pull-block" style="margin-top: 6mm;">
+        <div class="bar"></div>
+        <p class="pull-quote">Depois de apenas duas semanas seguindo o protocolo, minha glicemia de jejum caiu de 156 para 118 — e já perdi 3 kg sem sentir fome.</p>
+      </div>
+      <p class="body" style="margin-top: 6px; color: var(--body); font-style: italic; font-size: 14pt; text-align: right;">— Participante do Desafio</p>
+
+      <div class="stats-row" style="margin-top: 8mm;">
+        <div class="stat"><div class="num">156 → 118</div><div class="label">mg/dL em jejum</div></div>
+        <div class="stat"><div class="num">3 kg</div><div class="label">perdidos sem fome</div></div>
+        <div class="stat"><div class="num">2 semanas</div><div class="label">de protocolo</div></div>
+      </div>
+
+      <div class="callout safe" style="margin-top: 8mm;">
+        <div class="icon">✓</div>
+        <div>
+          <div class="title">É possível reverter</div>
+          <div class="body">Com estratégias corretas e disciplina, é possível reverter condições que antes eram consideradas crônicas e progressivas.</div>
+        </div>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">4 / 10</span></div>
+  </section>
+
+  <!-- AÇÚCAR NO SANGUE -->
+  <section class="page" data-screen-label="05 Açúcar no Sangue">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1 smaller">Açúcar no sangue</h1>
+          <p class="subhead">Comparações que vão te chocar</p>
+        </div>
+      </div>
+
+      <p class="lead">Uma pessoa saudável tem apenas <strong style="color: var(--accent);">5 g de açúcar total</strong> circulando no sangue — o equivalente a <strong>um pacotinho de açúcar</strong>. Compare com o que entra em uma única refeição:</p>
+
+      <div class="sugar-cmp">
+        <div class="sugar-row basal">
+          <div><div class="label">Açúcar no sangue</div><div class="sub">total em pessoa saudável</div></div>
+          <div class="bar"><div style="width: 6%;"></div></div>
+          <div class="val">5 g</div>
+        </div>
+        <div class="sugar-row">
+          <div><div class="label">Pão integral</div><div class="sub">carboidratos em 100 g</div></div>
+          <div class="bar"><div style="width: 47%;"></div></div>
+          <div class="val">40 g</div>
+        </div>
+        <div class="sugar-row">
+          <div><div class="label">Pão francês</div><div class="sub">em 100 g</div></div>
+          <div class="bar"><div style="width: 59%;"></div></div>
+          <div class="val">50 g</div>
+        </div>
+        <div class="sugar-row">
+          <div><div class="label">Tapioca</div><div class="sub">porção média (100 g)</div></div>
+          <div class="bar"><div style="width: 100%;"></div></div>
+          <div class="val">85 g</div>
+        </div>
+      </div>
+
+      <p class="body" style="font-size: 14.5pt; margin-bottom: 4mm;">Alimentos comumente vistos como "saudáveis" — aveia, quinoa, tapioca e batata doce — têm <strong>muito mais carboidrato do que o corpo precisa</strong>, provocando picos. A diferença entre batata doce e inglesa é mínima na carga glicêmica.</p>
+
+      <div class="callout" style="margin-top: 2mm;">
+        <div class="icon warn">!</div>
+        <div>
+          <div class="title warn">Cuidado com frutas em jejum</div>
+          <div class="body">O consumo excessivo de frutas, especialmente em jejum, pode causar <strong>hipoglicemia reativa</strong> — fome rebote e descontrole alimentar pelo resto do dia.</div>
+        </div>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">5 / 10</span></div>
+  </section>
+
+  <!-- HORMÔNIOS -->
+  <section class="page" data-screen-label="06 Hormônios">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1 smaller">Hormônios do metabolismo</h1>
+          <p class="subhead">Os mensageiros que comandam o seu corpo</p>
+        </div>
+      </div>
+
+      <p class="body" style="margin-bottom: 4mm;">Hormônios são substâncias sinalizadoras que regulam diversos processos. O equilíbrio entre eles é fundamental para a saúde metabólica.</p>
+
+      <div class="col-2" style="gap: 14px;">
+        <div class="horm-card">
+          <div class="hd"><span class="role">Estocagem</span><h3 class="nm">Insulina</h3></div>
+          <p>Sinaliza para as células absorverem glicose e armazenar gordura. Em níveis cronicamente elevados, causa resistência celular, inflamação e estimula crescimento celular (tumoral e adiposo).</p>
+        </div>
+        <div class="horm-card">
+          <div class="hd"><span class="role">Estresse</span><h3 class="nm">Cortisol</h3></div>
+          <p>Essencial para o despertar e a resposta ao estresse. Em excesso, causa resistência à insulina, fadiga, ganho de peso e inflamação.</p>
+        </div>
+        <div class="horm-card">
+          <div class="hd"><span class="role">T3 e T4</span><h3 class="nm">Tireoide</h3></div>
+          <p>Regulam o metabolismo geral. A conversão de T4 em T3 ativo é crucial para um funcionamento metabólico adequado.</p>
+        </div>
+        <div class="horm-card">
+          <div class="hd"><span class="role">Fome e saciedade</span><h3 class="nm">Leptina e grelina</h3></div>
+          <p>Leptina sinaliza saciedade — resistência à leptina te impede de sentir satisfação. Grelina estimula o apetite e a fome.</p>
+        </div>
+      </div>
+
+      <div class="card-accent" style="margin-top: 6mm;">
+        <div class="eyebrow">Outros importantes</div>
+        <p class="body" style="margin: 4px 0 0; color: var(--ink); font-size: 14.5pt;"><strong>GH</strong> (hormônio do crescimento) protege a massa muscular e estimula a queima de gordura. <strong>Incretinas (GLP-1 e GIP)</strong> regulam a secreção de insulina e a saciedade — são alvo dos novos medicamentos para diabetes e emagrecimento.</p>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">6 / 10</span></div>
+  </section>
+
+  <!-- INTERCONEXÃO HORMONAL -->
+  <section class="page" data-screen-label="07 Interconexão hormonal">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1 smaller">Interconexão hormonal</h1>
+          <p class="subhead">A orquestra do metabolismo</p>
+        </div>
+      </div>
+
+      <p class="lead">O sistema hormonal funciona como uma orquestra perfeitamente sincronizada. Quando um hormônio se desregula, cria-se um <strong>efeito dominó</strong> que afeta todo o sistema.</p>
+
+      <div class="domino">
+        <div class="stp">
+          <div class="n">1</div>
+          <div class="t">Resistência à insulina</div>
+          <div class="d">Ponto de partida para diversos desequilíbrios.</div>
+        </div>
+        <div class="stp">
+          <div class="n">2</div>
+          <div class="t">Aumento do cortisol</div>
+          <div class="d">Estresse crônico piora a resistência à insulina.</div>
+        </div>
+        <div class="stp">
+          <div class="n">3</div>
+          <div class="t">Desregulação da leptina</div>
+          <div class="d">Perda da sensação de saciedade — você come mais.</div>
+        </div>
+        <div class="stp">
+          <div class="n">4</div>
+          <div class="t">Inflamação sistêmica</div>
+          <div class="d">Piora todo o quadro, criando um ciclo vicioso.</div>
+        </div>
+      </div>
+
+      <p class="body" style="margin-top: 8mm;">O controle glicêmico efetivo depende da regulação de <strong>múltiplos hormônios</strong>, não apenas da glicose e insulina. A gordura visceral, aquela ao redor dos órgãos, é especialmente prejudicial: é metabolicamente ativa e produz substâncias inflamatórias que agravam os desequilíbrios hormonais.</p>
+
+      <div class="pull-block" style="margin-top: 6mm;">
+        <div class="bar"></div>
+        <p class="pull-quote">Tratar a glicemia sem olhar para os outros hormônios é como ajustar um instrumento sem ouvir a orquestra.</p>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">7 / 10</span></div>
+  </section>
+
+  <!-- MICROBIOTA -->
+  <section class="page" data-screen-label="08 Microbiota intestinal">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1 smaller">Microbiota intestinal</h1>
+          <p class="subhead">O eixo cérebro–intestino</p>
+        </div>
+      </div>
+
+      <p class="lead">O intestino é frequentemente chamado de <strong>"segundo cérebro"</strong>. Ele produz neurotransmissores e se comunica diretamente com o sistema nervoso central pelo eixo cérebro–intestino.</p>
+
+      <p class="body">Nossa microbiota é composta por trilhões de bactérias. Elas produzem neurotransmissores essenciais:</p>
+
+      <div class="col-3" style="gap: 12px; margin-top: 4mm;">
+        <div class="num-card">
+          <div class="n">★</div>
+          <div>
+            <div class="t">Serotonina</div>
+            <div class="d">Bem-estar. <strong>90% é produzida no intestino.</strong></div>
+          </div>
+        </div>
+        <div class="num-card">
+          <div class="n">★</div>
+          <div>
+            <div class="t">Dopamina</div>
+            <div class="d">Motivação e prazer.</div>
+          </div>
+        </div>
+        <div class="num-card">
+          <div class="n">★</div>
+          <div>
+            <div class="t">GABA</div>
+            <div class="d">Neurotransmissor calmante.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top: 8mm;">
+        <div class="icon warn">!</div>
+        <div>
+          <div class="title warn">Açúcar e ultraprocessados sabotam tudo</div>
+          <div class="body">Uma alimentação rica em açúcares e ultraprocessados <strong>altera negativamente a microbiota</strong>, prejudicando a produção desses neurotransmissores. Isso afeta humor, saúde mental e controle glicêmico — um ciclo de desregulação.</div>
+        </div>
+      </div>
+
+      <div class="pull-block" style="margin-top: 6mm;">
+        <div class="bar"></div>
+        <p class="pull-quote">Cuidar do intestino é cuidar do humor, do sono e da glicemia ao mesmo tempo.</p>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">8 / 10</span></div>
+  </section>
+
+  <!-- CONSIDERAÇÕES FINAIS -->
+  <section class="page" data-screen-label="09 Considerações Finais">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1 smaller">Considerações finais</h1>
+          <p class="subhead">E os próximos passos</p>
+        </div>
+      </div>
+
+      <p class="lead">O cardápio do Desafio é apenas o início. Para um controle duradouro do diabetes e uma saúde metabólica ideal, <strong>mudanças profundas no estilo de vida</strong> são fundamentais.</p>
+
+      <h2 class="h2" style="margin-top: 8mm; margin-bottom: 4mm;">Os quatro pilares</h2>
+      <div class="col-2" style="gap: 12px;">
+        <div class="num-card"><div class="n">01</div><div><div class="t">Alimentação consciente</div><div class="d">Base do controle glicêmico.</div></div></div>
+        <div class="num-card"><div class="n">02</div><div><div class="t">Atividade física regular</div><div class="d">Melhora a sensibilidade à insulina.</div></div></div>
+        <div class="num-card"><div class="n">03</div><div><div class="t">Qualidade do sono</div><div class="d">Essencial para o equilíbrio hormonal.</div></div></div>
+        <div class="num-card"><div class="n">04</div><div><div class="t">Controle do estresse</div><div class="d">Reduz cortisol e inflamação.</div></div></div>
+      </div>
+
+      <p class="body" style="margin-top: 6mm; font-size: 15pt;">Entender e regular todos os hormônios e fatores envolvidos é essencial para o sucesso a longo prazo. Não se trata só de reduzir carboidratos, mas de criar um <strong>ambiente interno favorável</strong> à saúde metabólica.</p>
+
+      <div class="cta-block">
+        <h2 class="cta-title"><span class="accent">Não esqueça de assinar a lista de presença</span> para participar do sorteio.</h2>
+        <p class="cta-text">Você concorre a uma vaga no programa completo Diabetes 3D, que aprofunda todos esses conceitos com suporte personalizado.</p>
+        <div class="cta-sign">Com carinho, Bela.</div>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">9 / 10</span></div>
+  </section>
+
+  <!-- CRONOGRAMA -->
+  <section class="page" data-screen-label="10 Cronograma">
+    <header class="ph-header"><img class="ph-logo" src="assets/logo.webp" alt=""></header>
+    <div class="page-body">
+      <div class="h1-block">
+        <div class="h1-mark"><svg viewBox="0 0 24 32"><use href="#drop"/></svg></div>
+        <div>
+          <h1 class="h1 smaller">Cronograma das Aulas</h1>
+          <p class="subhead">Todos os dias às 7h</p>
+        </div>
+      </div>
+
+      <div class="schedule">
+        <div class="schedule-row"><div class="day-badge">SEG</div><div class="time">7h</div><div><h3 class="lesson-title">O Raio-X da sua Saúde</h3><p class="lesson-desc">Descubra a verdade escondida do seu corpo.</p></div></div>
+        <div class="schedule-row"><div class="day-badge">TER</div><div class="time">7h</div><div><h3 class="lesson-title">Corpo em Alerta</h3><p class="lesson-desc">Identifique os alertas do seu metabolismo.</p></div></div>
+        <div class="schedule-row"><div class="day-badge">QUA</div><div class="time">7h</div><div><h3 class="lesson-title">Alimento Sob Controle</h3><p class="lesson-desc">Cada refeição vira um passo rumo à liberdade.</p></div></div>
+        <div class="schedule-row"><div class="day-badge">QUI</div><div class="time">7h</div><div><h3 class="lesson-title">Transformação Real</h3><p class="lesson-desc">Liberte-se do peso do diabetes.</p></div></div>
+        <div class="schedule-row"><div class="day-badge">SEX</div><div class="time">7h</div><div><h3 class="lesson-title">Mapa da Virada</h3><p class="lesson-desc">A rota para uma vida equilibrada.</p></div></div>
+        <div class="schedule-row"><div class="day-badge">SÁB</div><div class="time">7h</div><div><h3 class="lesson-title">Exames Decifrados</h3><p class="lesson-desc">Desvende os seus exames.</p></div></div>
+        <div class="schedule-row"><div class="day-badge">DOM</div><div class="time">7h</div><div><h3 class="lesson-title">Encerramento Triunfal + Sorteio</h3><p class="lesson-desc">Celebre e concorra a prêmios.</p></div></div>
+      </div>
+    </div>
+    <div class="ph-footer"><span class="nutri">Isabela Clerot · Nutricionista</span><span class="num">10 / 10</span></div>
+  </section>
+
+</div>
+<script>
+// Force reflow after fonts load (fixes layout shift from font-display: swap)
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(() => {
+    document.body.style.transform = 'translateZ(0)';
+    requestAnimationFrame(() => { document.body.style.transform = ''; });
+  });
+}
+</script>
+</body>
+</html>

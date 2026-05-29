@@ -15,19 +15,22 @@
 
 ## Deploy no GitHub Pages
 
-Configuração usada:
+O repositório está pronto para GitHub Pages, mas **o Pages está desabilitado** para que Luca publique manualmente depois de revisar.
 
+Configuração recomendada quando for publicar:
+
+- Source: `Deploy from a branch`
 - Branch: `main`
 - Pasta: `/` (root)
 
-Publicado em:
+URLs esperadas depois da ativação manual:
 
 ```text
 https://luca007.github.io/bela-2d-protocolo-3d/
 https://luca007.github.io/bela-2d-protocolo-3d/protocolo3d.html
 ```
 
-Repositório:
+Repositório oficial:
 
 ```text
 https://github.com/Luca007/bela-2d-protocolo-3d

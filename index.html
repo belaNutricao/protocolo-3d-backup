@@ -467,19 +467,31 @@ p { margin: 0 0 14px; }
 .hero-media .float-stat.br { bottom: 12%; right: -4%; }
 .hero-media .float-stat.br .n { color: var(--pink); }
 
-/* Hero text entrance animation (image is visible immediately for fast LCP) */
+/* Hero text entrance animation (not LCP, safe to fade in) */
 .hero-copy {
-  animation: heroCopyIn 0.58s cubic-bezier(.2,.6,.32,1) 0.02s both;
+  animation: heroCopyIn 0.58s cubic-bezier(.2,.6,.32,1) both;
 }
 @keyframes heroCopyIn {
   from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: none; }
 }
+
+/* Hero image entrance — opacity stays 1 throughout so LCP is immediate */
+.hero-media {
+  animation: heroMediaIn 0.4s cubic-bezier(.2,.6,.32,1) 0.15s both;
+}
+@keyframes heroMediaIn {
+  from { opacity: 1; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-copy { animation: none; }
+  .hero-media { animation: none; }
 }
 
 /* corner ring ornament */
+.corner-ring { position: absolute; color: var(--accent-soft); opacity: 0.6; pointer-events: none; z-index: 0; }
 .corner-ring svg { width: 100%; height: 100%; display: block; }
 
 /* ---------- Floating WhatsApp button ---------- */
@@ -822,13 +834,6 @@ p { margin: 0 0 14px; }
   transition-delay: var(--d, 0ms);
 }
 .reveal.in { opacity: 1; transform: none; filter: none; }
-
-.reveal {
-  opacity: 1;
-  transform: none;
-  filter: none;
-  transition: none;
-}
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; }
 }

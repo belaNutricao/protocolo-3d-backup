@@ -20,11 +20,17 @@ Configuração usada:
 - Branch: `main`
 - Pasta: `/` (root)
 
-Após push, o GitHub Pages publica em:
+Publicado em:
 
 ```text
-https://<usuario>.github.io/<repositorio>/
-https://<usuario>.github.io/<repositorio>/protocolo3d.html
+https://luca007.github.io/bela-2d-protocolo-3d/
+https://luca007.github.io/bela-2d-protocolo-3d/protocolo3d.html
+```
+
+Repositório:
+
+```text
+https://github.com/Luca007/bela-2d-protocolo-3d
 ```
 
 ## Verificação local

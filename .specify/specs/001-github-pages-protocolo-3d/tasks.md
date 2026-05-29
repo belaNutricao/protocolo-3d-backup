@@ -9,4 +9,4 @@
 - [x] T007 Add deployment documentation.
 - [x] T008 Run browser/console/static-asset verification.
 - [x] T009 Run repo hygiene/security checks.
-- [ ] T010 Commit, create GitHub repository, push, enable GitHub Pages, verify public URL.
+- [x] T010 Commit, create GitHub repository, push, enable GitHub Pages, verify public URL.

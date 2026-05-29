@@ -15,7 +15,7 @@
 <body>
 
 <!-- droplet symbol defs -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<svg class="svg-symbols" width="0" height="0" aria-hidden="true">
   <defs>
     <!-- official diabetes blue circle (3D mark) -->
     <symbol id="dia-ring" viewBox="0 0 48 48">
@@ -60,7 +60,7 @@
 
 <!-- ============ HERO ============ -->
 <section class="hero" id="topo" data-bc="Início" data-screen-label="Hero">
-  <div class="corner-ring" style="top:-60px; left:-50px; width:190px; height:190px;">
+  <div class="corner-ring corner-ring-hero">
     <svg viewBox="0 0 48 48"><use href="#dia-ring"></use></svg>
   </div>
   <div class="wrap">
@@ -79,7 +79,7 @@
       </div>
       <div class="hero-media reveal">
         <div class="halo"></div>
-        <img class="bela" src="assets/remote/bela-1.webp" alt="Isabela Clerot, nutricionista" width="875" height="875" fetchpriority="high" decoding="async">
+        <img class="bela" src="assets/remote/bela-1.webp" alt="Isabela Clerot, nutricionista" width="875" height="875" decoding="async">
         <div class="float-stat tl">
           <span class="n">3D</span>
           <span class="l">Alimento, Corpo e Estratégia</span>
@@ -104,24 +104,24 @@
     <div class="grid grid-2 mt-l">
       <div class="card reveal">
         <h3 class="card-title">Você reconhece o medo?</h3>
-        <p class="card-body" style="margin-bottom:22px;">Sei o quanto pesa carregar isso todos os dias. Talvez você sinta:</p>
+        <p class="card-body card-body-spaced">Sei o quanto pesa carregar isso todos os dias. Talvez você sinta:</p>
         <ul class="x-list">
           <li><span class="x">✕</span><span><strong>A glicemia fora de controle</strong>, mesmo se esforçando para fazer tudo certo.</span></li>
           <li><span class="x">✕</span><span><strong>O medo constante</strong> das complicações — a vista, os rins, o cansaço que não passa.</span></li>
           <li><span class="x">✕</span><span><strong>A frustração</strong> de dietas que não duram e remédios que só aumentam.</span></li>
         </ul>
-        <p class="card-body" style="margin:22px 0 0; font-weight:600; color:var(--ink);">A boa notícia: você não precisa viver assim.</p>
+        <p class="card-body card-body-emphasis">A boa notícia: você não precisa viver assim.</p>
       </div>
 
       <div class="card reveal">
         <h3 class="card-title">Por que nada funcionou até agora?</h3>
-        <p class="card-body" style="margin-bottom:22px;">Porque te ensinaram o caminho errado a vida inteira:</p>
+        <p class="card-body card-body-spaced">Porque te ensinaram o caminho errado a vida inteira:</p>
         <ul class="x-list">
           <li><span class="x">✕</span><span><strong>Cortar a gordura?</strong> Só aumenta a fome e a vontade de doce.</span></li>
           <li><span class="x">✕</span><span><strong>Trocar pelo integral?</strong> A glicemia dispara quase do mesmo jeito.</span></li>
           <li><span class="x">✕</span><span><strong>Comer de 3 em 3 horas?</strong> Prende você num ciclo sem fim de compulsão.</span></li>
         </ul>
-        <p class="card-body" style="margin:22px 0 0; font-weight:600; color:var(--ink);">A culpa nunca foi sua. Só te explicaram errado.</p>
+        <p class="card-body card-body-emphasis">A culpa nunca foi sua. Só te explicaram errado.</p>
       </div>
     </div>
 
@@ -179,7 +179,7 @@
       <h2 class="display h-lg">Quatro dimensões, <span class="accent">um passo de cada vez.</span></h2>
     </div>
 
-    <div class="grid grid-2 mt-l" style="gap:48px; align-items:center;">
+    <div class="grid grid-2 mt-l platform-grid">
       <div class="reveal">
         <div class="dim">
           <div class="num"><small>Dimensão</small>0</div>
@@ -211,7 +211,7 @@
         <li><span class="ck ic-svg"><svg><use href="#dia-check"></use></svg></span><span><strong>Lista Semáforo:</strong> saiba na hora o que comer e o que evitar.</span></li>
         <li><span class="ck ic-svg"><svg><use href="#dia-check"></use></svg></span><span><strong>Guia de Adoçantes:</strong> escolha sem errar, sem dúvida.</span></li>
       </ul>
-      <p class="muted-note mt-s" style="margin-bottom:0;">Acesso imediato e 100% online — no celular, no tablet ou no computador, no seu ritmo e de onde você estiver.</p>
+      <p class="muted-note mt-s no-margin-bottom">Acesso imediato e 100% online — no celular, no tablet ou no computador, no seu ritmo e de onde você estiver.</p>
     </div>
 
     <div class="center mt-m reveal">
@@ -264,7 +264,7 @@
       <div class="bonus reveal">
         <div class="bonus-top">
           <img class="thumb" src="assets/remote/bonus-39.webp" alt="" width="150" height="150" loading="lazy" decoding="async">
-          <span class="tag">Curso · <s>R$297</s> <span style="color:var(--accent);font-weight:800;">grátis</span></span>
+          <span class="tag">Curso · <s>R$297</s> <span class="bonus-free">grátis</span></span>
         </div>
         <h4>Análise de Exames</h4>
         <p>Aprenda a entender seus resultados e a tomar decisões com confiança, ao lado do seu médico.</p>
@@ -280,15 +280,15 @@
       <div class="bonus reveal">
         <div class="bonus-top">
           <img class="thumb" src="assets/remote/bonus-42.webp" alt="" width="150" height="150" loading="lazy" decoding="async">
-          <span class="tag">Movimento · <s>R$497</s> <span style="color:var(--accent);font-weight:800;">grátis</span></span>
+          <span class="tag">Movimento · <s>R$497</s> <span class="bonus-free">grátis</span></span>
         </div>
         <h4>Mini Curso Mob da Leandra</h4>
         <p>Exercícios leves com a Lelê para recuperar energia e mobilidade, no seu tempo e em casa.</p>
       </div>
-      <div class="bonus reveal" style="background:var(--card-grad); display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
-        <p class="eyebrow" style="margin-bottom:10px;"><span class="dot"></span>E ainda</p>
-        <h4 style="font-size:25px; margin:0 0 8px;">Bônus e descontos progressivos</h4>
-        <p style="margin-bottom:18px;">Quanto antes você entrar, mais você leva. As condições melhoram para quem decide primeiro.</p>
+      <div class="bonus reveal bonus-extra">
+        <p class="eyebrow bonus-extra-eyebrow"><span class="dot"></span>E ainda</p>
+        <h4 class="bonus-extra-title">Bônus e descontos progressivos</h4>
+        <p class="bonus-extra-copy">Quanto antes você entrar, mais você leva. As condições melhoram para quem decide primeiro.</p>
         <a class="btn sm" href="#inscricao">Quero aproveitar agora<span class="arrow">→</span></a>
       </div>
     </div>
@@ -308,7 +308,7 @@
         <div class="nps-score">4.9<small>NPS dos alunos</small></div>
         <div class="stars">★★★★★</div>
       </div>
-      <p class="lead" style="margin:0; flex:1 1 280px; min-width:260px; color:var(--ink);">Uma das maiores notas de satisfação que um programa de saúde metabólica pode ter — construída por pessoas reais que voltaram a confiar no próprio corpo.</p>
+      <p class="lead nps-lead">Uma das maiores notas de satisfação que um programa de saúde metabólica pode ter — construída por pessoas reais que voltaram a confiar no próprio corpo.</p>
     </div>
 
     <div class="grid grid-3 mt-l">
@@ -339,7 +339,7 @@
       <p class="eyebrow center"><span class="dot"></span>O Protocolo 3D é pra você?</p>
       <h2 class="display h-lg">Feito para quem está pronto(a) <span class="accent">para virar essa página.</span></h2>
     </div>
-    <ul class="drop-list cols mt-l reveal" style="font-size:17px;">
+    <ul class="drop-list cols mt-l reveal audience-list">
       <li><span class="ck ic-svg"><svg><use href="#dia-check"></use></svg></span><span>Está pré-diabético(a) e quer prevenir o diabetes.</span></li>
       <li><span class="ck ic-svg"><svg><use href="#dia-check"></use></svg></span><span>Tem diagnóstico de diabetes tipo 2.</span></li>
       <li><span class="ck ic-svg"><svg><use href="#dia-check"></use></svg></span><span>Quer reduzir a necessidade de medicamentos.</span></li>
@@ -361,8 +361,8 @@
     <div class="ia-card reveal">
       <div>
         <p class="eyebrow"><span class="dot"></span>Escolha opcional</p>
-        <h3 class="display h-md" style="margin-bottom:14px;">Belinha, sua companheira de <span class="accent">inteligência virtual.</span></h3>
-        <p class="lead" style="margin-top:0;">Se quiser ir ainda mais perto, você pode adicionar a Belinha — uma assistente que te guia e acompanha em cada passo da jornada. Tudo supervisionado por mim, sua nutri.</p>
+        <h3 class="display h-md ia-title">Belinha, sua companheira de <span class="accent">inteligência virtual.</span></h3>
+        <p class="lead ia-lead">Se quiser ir ainda mais perto, você pode adicionar a Belinha — uma assistente que te guia e acompanha em cada passo da jornada. Tudo supervisionado por mim, sua nutri.</p>
       </div>
       <div>
         <ul class="drop-list">
@@ -371,7 +371,7 @@
           <li><span class="ck ic-svg"><svg><use href="#dia-check"></use></svg></span><span>Feedback em tempo real</span></li>
           <li><span class="ck ic-svg"><svg><use href="#dia-check"></use></svg></span><span>1 análise nutricional de exames</span></li>
         </ul>
-        <p class="muted-note mt-s" style="margin-bottom:16px;">Liberada em até 30 dias após a entrada.</p>
+        <p class="muted-note mt-s ia-note">Liberada em até 30 dias após a entrada.</p>
         <a class="btn" href="#inscricao">Quero o Protocolo com IA<span class="arrow">→</span></a>
       </div>
     </div>
@@ -442,7 +442,7 @@
 <section class="band band-ink tight">
   <div class="wrap countdown-band">
     <span class="urgency-pill"><span class="u-dot"></span>Oferta por tempo limitado</span>
-    <p class="display h-md on-ink" style="margin:0;">As condições desta turma <span class="accent">encerram em:</span></p>
+    <p class="display h-md on-ink countdown-title">As condições desta turma <span class="accent">encerram em:</span></p>
     <div class="countdown" id="countdown" aria-live="polite">
       <div class="unit"><span class="v" data-d>00</span><span class="k">Dias</span></div>
       <span class="cd-sep">:</span>
@@ -499,7 +499,7 @@
       </div>
       <div class="mentora-bio reveal">
         <p class="eyebrow"><span class="dot"></span>Conheça sua mentora</p>
-        <h2 class="display h-lg" style="margin-bottom:20px;">Isabela <span class="accent">Clerot.</span></h2>
+        <h2 class="display h-lg mentora-title">Isabela <span class="accent">Clerot.</span></h2>
         <p>Sou nutricionista especializada na prevenção, no controle e na reversão do diabetes por meio da alimentação e do estilo de vida — sempre com base em evidências científicas.</p>
         <p>Minha caminhada começou na pele: aos 30 anos enfrentei ganho de peso e pré-diabetes, e foi isso que me levou a mergulhar fundo nesse conhecimento. Hoje dedico minha vida a ajudar pessoas como você a enxergar a comida como a chave para prevenir e tratar as doenças crônicas do nosso tempo.</p>
         <div class="sig">Bela<small>Isabela Clerot · Nutricionista</small></div>

@@ -192,8 +192,8 @@ p { margin: 0 0 14px; }
   top: 0; left: 0; right: 0;
   z-index: 50;
   background: rgba(255,251,253,0.86);
-  backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--rule-soft);
 }
 .nav-inner {
@@ -246,7 +246,6 @@ p { margin: 0 0 14px; }
   align-items: stretch;
   gap: 26px;
   overflow-x: auto;
-  scrollbar-width: none;
 }
 .bc-track::-webkit-scrollbar { display: none; }
 .bc-chip {
@@ -772,6 +771,27 @@ p { margin: 0 0 14px; }
 .foot .foot-line { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 16px; color: var(--pink-bright); margin-top: 24px; }
 .foot .foot-meta { font-family: var(--sans); font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 8px; line-height: 1.6; }
 .foot hr { border: none; border-top: 1px solid rgba(255,255,255,0.14); margin: 36px auto; max-width: 480px; }
+
+
+/* ---------- Utility classes moved from inline styles ---------- */
+.svg-symbols { position: absolute; }
+.corner-ring-hero { top: -60px; left: -50px; width: 190px; height: 190px; }
+.card-body-spaced { margin-bottom: 22px; }
+.card-body-emphasis { margin: 22px 0 0; font-weight: 600; color: var(--ink); }
+.platform-grid { gap: 48px; align-items: center; }
+.no-margin-bottom { margin-bottom: 0; }
+.bonus-free { color: var(--accent); font-weight: 800; }
+.bonus-extra { background: var(--card-grad); display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+.bonus-extra-eyebrow { margin-bottom: 10px; }
+.bonus-extra-title { font-size: 25px; margin: 0 0 8px; }
+.bonus-extra-copy { margin-bottom: 18px; }
+.nps-lead { margin: 0; flex: 1 1 280px; min-width: 260px; color: var(--ink); }
+.audience-list { font-size: 17px; }
+.ia-title { margin-bottom: 14px; }
+.ia-lead { margin-top: 0; }
+.ia-note { margin-bottom: 16px; }
+.countdown-title { margin: 0; }
+.mentora-title { margin-bottom: 20px; }
 
 /* ---------- Misc ---------- */
 .divider { height: 1px; background: var(--rule); border: none; margin: 0; }

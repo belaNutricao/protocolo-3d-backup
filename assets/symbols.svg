@@ -1,0 +1,23 @@
+<svg class="svg-symbols" width="0" height="0" aria-hidden="true">
+  <defs>
+    <symbol id="dia-ring" viewBox="0 0 48 48">
+      <circle cx="24" cy="24" r="17.5" fill="none" stroke="currentColor" stroke-width="7"></circle>
+    </symbol>
+    <symbol id="dia-3d-ring" viewBox="0 0 100 100">
+      <path d="M63.3 13.3 A39 39 0 1 1 36.7 13.3" fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round"></path>
+      <path d="M63.3 13.3 A46 46 0 0 0 48.5 8.2" fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round"></path>
+    </symbol>
+    <symbol id="dia-check" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="11" fill="currentColor"></circle>
+      <path d="M6.8 12.4 l3.2 3.3 L17 8.2" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"></path>
+    </symbol>
+    <linearGradient id="sealGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3aa6f0"></stop>
+      <stop offset="0.55" stop-color="#0F5BD4"></stop>
+      <stop offset="1" stop-color="#0A3FA0"></stop>
+    </linearGradient>
+    <symbol id="seal" viewBox="0 0 100 100">
+      <polygon fill="url(#sealGrad)" points="50.00,0.00 55.94,4.89 62.94,1.70 67.41,7.96 75.00,6.70 77.70,13.90 85.36,14.64 86.10,22.30 93.30,25.00 92.04,32.59 98.30,37.06 95.11,44.06 100.00,50.00 95.11,55.94 98.30,62.94 92.04,67.41 93.30,75.00 86.10,77.70 85.36,85.36 77.70,86.10 75.00,93.30 67.41,92.04 62.94,98.30 55.94,95.11 50.00,100.00 44.06,95.11 37.06,98.30 32.59,92.04 25.00,93.30 22.30,86.10 14.64,85.36 13.90,77.70 6.70,75.00 7.96,67.41 1.70,62.94 4.89,55.94 0.00,50.00 4.89,44.06 1.70,37.06 7.96,32.59 6.70,25.00 13.90,22.30 14.64,14.64 22.30,13.90 25.00,6.70 32.59,7.96 37.06,1.70 44.06,4.89"></polygon>
+    </symbol>
+  </defs>
+</svg>
